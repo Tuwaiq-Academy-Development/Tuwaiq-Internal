@@ -1,0 +1,38 @@
+{
+  "name": "tuwaiq-sdaia-form",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "//build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.7",
+    "@types/alpinejs": "^3.13.5",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "@types/node": "^20.10.5",
+    "@types/tabulator-tables": "^5.5.4",
+    "@yaireo/tagify": "^4.17.9",
+    "alpinejs": "^3.13.2",
+    "axios": "^1.6.2",
+    "child_process": "^1.0.2",
+    "flowbite": "^2.2.1",
+    "fs": "^0.0.1-security",
+    "nouislider": "^15.7.1",
+    "path": "^0.12.7",
+    "process": "^0.11.10",
+    "sweetalert2": "^11.10.1",
+    "tabulator-tables": "^5.5.2",
+    "vite-plugin-live-reload": "^3.0.3",
+    "zod": "^3.22.4"
+  }
+}

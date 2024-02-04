@@ -1,0 +1,145 @@
+@import  "tabulator-tables";
+@import "tabulator-tables/dist/css/tabulator_materialize.min.css";
+@import "@yaireo/tagify/dist/tagify.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html {
+  overflow: scroll !important;
+  overflow-x: hidden !important;
+  scroll-behavior: smooth !important;
+  font-family: 'Next', 'sans-serif';
+  font-weight: 400;
+  @apply antialiased;
+
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 400;
+  src: url("$fonts/Next.ttf");
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 200;
+  src: url("$fonts/Next-ExtraLight.ttf");
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 300;
+  src: url("$fonts/Next-Light.ttf");
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 500;
+  src: url("$fonts/Next-Medium.ttf");
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 700;
+  src: url("$fonts/Next-Bold.ttf");
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 800;
+  src: url("$fonts/Next-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 900;
+  src: url("$fonts/Next-Black.ttf");
+}
+
+/* Tabulator header columns */
+
+.tabulator-col{
+  @apply bg-white border-0  !important;
+}
+
+.tabulator-header{
+  @apply bg-transparent border-0 border-y border-gray-300 text-gray-500 !important;
+}
+
+.tabulator{
+  @apply border-0 bg-white text-sm font-medium !important;
+}
+
+.tabulator-cell{
+  @apply border-0 !important;
+}
+
+.tabulator-row{
+  @apply border-0 border-b !important;
+}
+
+button.tabulator-page {
+  @apply text-[#B0B0B0] text-center;
+  background-color: #E9E9E9 !important;
+  border-radius: 15px !important;
+  opacity: 1 !important;
+  border: 0 !important;
+  margin-left: 0.20rem !important;
+  margin-right: 0.20rem !important;
+
+}
+
+
+
+button.tabulator-page.active {
+  @apply !bg-primary !text-white;
+}
+
+button.tabulator-page:hover {
+  @apply !text-primary;
+}
+.tabulator-paginator {
+  @apply flex justify-center;
+}
+
+.tabulator-pages{
+  margin: 0 !important;
+}
+
+[name=numberSlider] {
+  @apply h-2 rounded-lg bg-[#F7F8F9] border-0 !important;
+}
+
+[name=numberSlider] .noUi-connects {
+  @apply h-2 !important;
+}
+[name=numberSlider] .noUi-connect {
+  @apply bg-primary h-2 !important;
+}
+
+[name=numberSlider] .noUi-handle {
+  @apply w-5 h-5 -top-[6px] -left-[11px] rounded-full bg-secondary border-0 !important;
+}
+
+.slider-styled,
+.slider-styled .noUi-handle {
+    /* box-shadow: none; */
+    @apply shadow-none !important;
+}
+
+/* Hide markers on slider handles */
+.slider-styled .noUi-handle::before,
+.slider-styled .noUi-handle::after {
+    display: none;
+}
+
+.slider-styled .noUi-marker {
+  @apply hidden !important;
+}
+ 
+.slider-styled .noUi-value {
+  @apply text-xs text-[#696F79] !important;
+}

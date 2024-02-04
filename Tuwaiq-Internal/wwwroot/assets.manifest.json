@@ -1,0 +1,47 @@
+{
+  "src/assets/fonts/Next-Black.ttf": {
+    "file": "assets/Next-Black.ttf",
+    "src": "src/assets/fonts/Next-Black.ttf"
+  },
+  "src/assets/fonts/Next-Bold.ttf": {
+    "file": "assets/Next-Bold.ttf",
+    "src": "src/assets/fonts/Next-Bold.ttf"
+  },
+  "src/assets/fonts/Next-ExtraBold.ttf": {
+    "file": "assets/Next-ExtraBold.ttf",
+    "src": "src/assets/fonts/Next-ExtraBold.ttf"
+  },
+  "src/assets/fonts/Next-ExtraLight.ttf": {
+    "file": "assets/Next-ExtraLight.ttf",
+    "src": "src/assets/fonts/Next-ExtraLight.ttf"
+  },
+  "src/assets/fonts/Next-Light.ttf": {
+    "file": "assets/Next-Light.ttf",
+    "src": "src/assets/fonts/Next-Light.ttf"
+  },
+  "src/assets/fonts/Next-Medium.ttf": {
+    "file": "assets/Next-Medium.ttf",
+    "src": "src/assets/fonts/Next-Medium.ttf"
+  },
+  "src/assets/fonts/Next.ttf": {
+    "file": "assets/Next.ttf",
+    "src": "src/assets/fonts/Next.ttf"
+  },
+  "src/main.ts": {
+    "assets": [
+      "assets/Next.ttf",
+      "assets/Next-ExtraLight.ttf",
+      "assets/Next-Light.ttf",
+      "assets/Next-Medium.ttf",
+      "assets/Next-Bold.ttf",
+      "assets/Next-ExtraBold.ttf",
+      "assets/Next-Black.ttf"
+    ],
+    "css": [
+      "css/main.css"
+    ],
+    "file": "js/main.js",
+    "isEntry": true,
+    "src": "src/main.ts"
+  }
+}

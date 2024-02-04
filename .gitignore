@@ -1,0 +1,9 @@
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+node_modules/
+/node_modules/
+/node_modules
+/SdaiaJobForm/ClientApp/node_modules/
