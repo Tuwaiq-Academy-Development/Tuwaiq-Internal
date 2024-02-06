@@ -179,6 +179,7 @@ const component: IComponent = {
        console.log(id);
         axios.post(`/api/Candidate/UpdateStatus?id=`+id);
         this.initTabulator();
+        this.table.setData();
     }
 };
 export default () => component;
