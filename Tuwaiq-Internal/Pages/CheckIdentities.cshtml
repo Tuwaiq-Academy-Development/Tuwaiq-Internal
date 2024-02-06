@@ -8,14 +8,14 @@
             </h1>
             <div class="flex flex-col w-full col-span-2 gap-2">
 
-                <div class="w-full mb-6">
+                <div class="w-full mb-6 p-10">
                     <hr class="w-full h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700">
                     <h3 class="text-center">
                         لاستيراد ارقام الهويات عن طريق ملف الاكسل
                     </h3>
                 </div>
 
-                <div class="flex items-center justify-center w-full">
+                <div class="flex items-center justify-center w-full p-10">
                     <label for="dropzone-file" class="relative flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                         <div class="flex flex-col items-center justify-center pt-5 pb-6">
                             <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -35,9 +35,9 @@
                 <hr class="w-full h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700">
 
             </div>
-            <div>
-                <textarea x-model="candidates"
-      class="peer h-full min-h-[100px] w-full resize-none rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:resize-none disabled:border-0 disabled:bg-blue-gray-50"
+            <div class="m-10 p-5">
+                <textarea x-model="candidates" rows="30"
+      class="peer h-full min-h-[100px] w-full  rounded-[7px] border border-blue-gray-200  bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 disabled:border-0 disabled:bg-blue-gray-50"
       placeholder=" "></textarea>
 
             </div>

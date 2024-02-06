@@ -82,18 +82,18 @@ const component: IComponent = {
 						</div>`
                     }
                 },
-                {
-                    title: 'الرابط', field: 'fileUrl', headerSort: false,
-                    formatter: function (cell) {
-                        if (cell.getValue() == null) return '';
-                        return `
-						<div class="flex justify-center items-center">
-							<div class="text-black leading-5">
-								${cell.getValue()}
-							</div>
-						</div>`
-                    }
-                },
+                // {
+                //     title: 'الرابط', field: 'fileUrl', headerSort: false,
+                //     formatter: function (cell) {
+                //         if (cell.getValue() == null) return '';
+                //         return `
+				// 		<div class="flex justify-center items-center">
+				// 			<div class="text-black leading-5">
+				// 				${cell.getValue()}
+				// 			</div>
+				// 		</div>`
+                //     }
+                // },
                 {
                     title: 'الحاله', field: 'status', headerSort: false,
                     formatter: function (cell) {

@@ -16,22 +16,23 @@ namespace TuwaiqRecruitment.Controllers;
 //[Authorize]
 [ApiController]
 [Route("api/[controller]")]
-public class CandidateController : Controller
+public class CandidateController(ApplicationDbContext context) : Controller
 {
-    private readonly ApplicationDbContext _context;
-
-    public CandidateController(ApplicationDbContext context)
-    {
-        _context = context;
-    }
-
-
     [HttpPost("[action]")]
     public async Task<IActionResult> CheckIdentities(List<string> candidates)
     {
-        var currentCandidates = _context.ToBeCheckeds.Where(i => candidates.Contains(i.NationalId)).ToList();
-        var validCandidates = new List<string>();
+        var list = new List<string>();
         foreach (var item in candidates)
+        {
+            if (ValidateSAID.check(item) != -1)
+            {
+                list.Add(item);
+            }
+        }
+        
+        var currentCandidates = context.ToBeCheckeds.Where(i => list.Contains(i.NationalId)).ToList();
+        var validCandidates = new List<string>();
+        foreach (var item in list)
         {
             var current = currentCandidates.FirstOrDefault(i => i.NationalId == item);
             if (ValidateSAID.check(item) != -1)
@@ -42,7 +43,7 @@ public class CandidateController : Controller
                 }
                 else
                 {
-                    _context.ToBeCheckeds.Add(new ToBeChecked()
+                    context.ToBeCheckeds.Add(new ToBeChecked()
                     {
                         NationalId = item,
                         IsChecked = false,
@@ -55,7 +56,7 @@ public class CandidateController : Controller
             }
         }
 
-        _context.ChecksHistories.Add(new ChecksHistory()
+        context.ChecksHistories.Add(new ChecksHistory()
         {
             CreatedOn = DateTime.Now,
             LastUpdate = DateTime.Now,
@@ -65,23 +66,23 @@ public class CandidateController : Controller
             ThirdName = "test",
             LastName = "test",
             UserId = "1",
-            Status = "0/" + candidates.Count,
-            FileUrl = "/templates/",
+            Status = "0/" + list.Count,
+            // FileUrl = "/templates/",
             Type = CheckTypes.Hadaf
         });
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
         return Ok();
     }
 
     [HttpGet("[action]")]
     public async Task<IActionResult> GetHistory(int? page = 1, int? size = 10)
     {
-        var result = _context.ChecksHistories.Select(x => new
+        var result = context.ChecksHistories.Select(x => new
         {
             x.UserId,
             x.Id, x.FirstName, x.FileUrl, x.Status, x.CreatedOn, x.LastUpdate, x.Type
         }).Skip(((page ?? 1) - 1) * (size ?? 10)).Take(size ?? 10).ToList();
-        var count = _context.ChecksHistories.Count();
+        var count = context.ChecksHistories.Count();
         return Ok(new
         {
             Data = result.ToList(),
@@ -92,11 +93,11 @@ public class CandidateController : Controller
     [HttpPost("[action]")]
     public async Task<IActionResult> UpdateStatus(int id)
     {
-        var toBeupdates = _context.ChecksHistories.FirstOrDefault(i => i.Id ==  id);
+        var toBeupdates = context.ChecksHistories.FirstOrDefault(i => i.Id ==  id);
         var serializedList =JsonConvert.DeserializeObject<List<string>>(toBeupdates.IdentitiesList) ;
-        var checkCount =    _context.ToBeCheckeds.Count(i => serializedList.Contains(i.NationalId) && i.IsChecked == true);
+        var checkCount =    context.ToBeCheckeds.Count(i => serializedList.Contains(i.NationalId) && i.IsChecked == true);
          toBeupdates.Status = checkCount + "/" + serializedList.Count;
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
         return Ok();
     }
 }

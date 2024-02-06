@@ -1,8 +1,8 @@
 import {ILayout} from './layout';
 import axios from 'axios';
 import {any} from "zod";
-import {toastError, toastSuccess} from "../../config/toastifyConfig";
 import * as ExcelJS from "exceljs";
+import {toastSucess} from "../config/toastifyConfig";
 
 interface IComponent extends Partial<ILayout> {
  
@@ -22,7 +22,7 @@ const CheckIdentities: IComponent = {
     },
     async checkIdentities() {
         await axios.post(`/api/Candidate/CheckIdentities`, this.candidates.split('\n'));
-        toastSuccess('تم الاستعلام علي الهويات بنجاح');
+        toastSucess('تم الاستعلام علي الهويات بنجاح');
 
     },
     handleImportChange(e: any) {
@@ -47,7 +47,7 @@ const CheckIdentities: IComponent = {
                     })
                 })
             }).then(() => {
-                toastSuccess('تم إستيراد الهويات بنجاح');
+                toastSucess('تم إستيراد الهويات بنجاح');
                 this.candidates = localcandidates;
             })
         }

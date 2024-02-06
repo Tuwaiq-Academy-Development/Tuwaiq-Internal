@@ -143,3 +143,445 @@ button.tabulator-page:hover {
 .slider-styled .noUi-value {
   @apply text-xs text-[#696F79] !important;
 }
+
+
+
+html {
+  overflow: scroll !important;
+  overflow-x: hidden !important;
+  scroll-behavior: smooth !important;
+  font-family: 'Next' 'sans-serif';
+  font-weight: 400;
+}
+
+body {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 400;
+  src: url("../fonts/Next.ttf");
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 200;
+  src: url("../fonts/Next-ExtraLight.ttf");
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 300;
+  src: url("../fonts/Next-Light.ttf");
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 500;
+  src: url("../fonts/Next-Medium.ttf");
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 700;
+  src: url("../fonts/Next-Bold.ttf");
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 800;
+  src: url("../fonts/Next-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 900;
+  src: url("../fonts/Next-Black.ttf");
+}
+
+
+[x-cloak] {
+  display: none !important;
+}
+
+.ts-wrapper {
+  @apply mt-2;
+}
+
+.ts-control {
+  @apply !pr-10;
+}
+
+.input-text {
+  @apply rounded-lg disabled:bg-gray-200 text-light-gray-700 border-light-gray-300 focus:ring-0 focus:border-light-gray-300;
+}
+
+.input-select {
+  @apply rounded-lg disabled:bg-gray-200 text-light-gray-700 border-light-gray-300 focus:ring-0 focus:border-light-gray-300;
+}
+
+.choices__inner {
+  @apply px-5 bg-white rounded-lg text-light-gray-700 border-light-gray-300 focus:ring-0 focus:border-light-gray-300;
+}
+
+.choices__list--single {
+  @apply mr-4;
+}
+
+.choices__item {
+  @apply text-[1rem] font-normal;
+}
+
+.jcalendar-input {
+  background-image: url('../../../../wwwroot/icons/date.svg');
+  background-position: 4%;
+  padding-left: 0.75rem;
+}
+
+
+.jcalendar-input:disabled {
+  background-image: url('../../../../wwwroot/icons/date-disabled.svg');
+  background-position: 4%;
+  padding-left: 0.75rem;
+}
+
+
+.choices {
+  @apply w-full my-auto;
+}
+
+.input-error {
+  @apply border-red-600 !important;
+}
+
+
+.swal2-validation-message {
+  @apply !text-red-500 !bg-white;
+}
+
+.swal2-show {
+  animation: none !important;
+}
+
+div:where(.swal2-icon).swal2-warning.swal2-icon-show {
+  animation: none !important;
+}
+
+
+.reset-button {
+  @apply text-white rounded-lg w-44 bg-primary hover:bg-primary disabled:bg-gray-200 disabled:text-gray-600;
+}
+
+.tabulator {
+  @apply bg-transparent;
+}
+
+.tabulator .tabulator-tableholder .tabulator-table {
+  @apply bg-white;
+}
+
+.tabulator .tabulator-header .tabulator-col {
+  @apply text-center bg-transparent;
+}
+
+.tabulator .tabulator-header {
+  @apply text-center bg-transparent;
+
+}
+
+.tabulator.tabulator-rtl .tabulator-row .tabulator-cell {
+  @apply text-base leading-5 text-center text-gray-600 border-l-0 border-r-0;
+}
+
+.tabulator-row {
+  @apply border-b border-gray-200;
+}
+
+.tabulator .tabulator-header {
+  @apply border-gray-200;
+}
+
+
+.tabulator .tabulator-header .tabulator-col .tabulator-col-content {
+  @apply !p-2;
+}
+
+.tabulator .tabulator-header .tabulator-col .tabulator-col-content .tabulator-col-title {
+  @apply flex items-center justify-center h-full p-3 text-base font-medium leading-4 text-center text-gray-500 justify-items-center;
+}
+
+.tabulator-row.tabulator-selected {
+  @apply bg-gray-100;
+}
+
+.tabulator-row.tabulator-selected:hover {
+  @apply bg-gray-100;
+}
+
+.tabulator-row.tabulator-selected input[type="checkbox"] {
+  @apply rounded-sm bg-primary focus:ring-0;
+}
+
+.tabulator-cell input[type="checkbox"] {
+  @apply bg-white border border-gray-500 rounded-sm focus:ring-0;
+}
+
+.tabulator-col-title input[type="checkbox"] {
+  @apply bg-white border border-gray-500 rounded-sm focus:ring-0;
+}
+
+.tabulator-col-title input[type="checkbox"]:checked {
+  @apply rounded-sm bg-primary focus:ring-0;
+
+}
+
+.tabulator-page[data-page='first'], .tabulator-page[data-page='last'], .tabulator-page[data-page='next'], .tabulator-page[data-page='prev'] {
+  display: none !important;
+}
+
+.tabulator .tabulator-footer .tabulator-page.active {
+  @apply bg-[#F0F2F5] text-[#3B4458] rounded-lg border-0;
+}
+
+.tabulator .tabulator-footer .tabulator-page {
+  @apply text-gray-500 bg-transparent border-0;
+}
+
+.tabulator .tabulator-footer .tabulator-paginator {
+  @apply flex justify-center gap-1;
+}
+
+.tabulator .tabulator-footer .tabulator-page:last-of-type, .tabulator .tabulator-footer .tabulator-page[data-page="prev"] {
+  @apply border-0 rounded-lg;
+}
+
+.tabulator .tabulator-footer .tabulator-page:not(.disabled):hover:not(.active) {
+  @apply bg-transparent border-0 rounded-lg text-primary;
+}
+
+.tabulator .tabulator-footer .tabulator-page.active:not(.disabled):hover {
+  @apply bg-[#F0F2F5] text-primary rounded-lg border-0;
+}
+
+
+
+html {
+  overflow: scroll !important;
+  overflow-x: hidden !important;
+  scroll-behavior: smooth !important;
+  font-family: 'Next' 'sans-serif';
+  font-weight: 400;
+}
+
+body {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 400;
+  src: url("../fonts/Next.ttf");
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 200;
+  src: url("../fonts/Next-ExtraLight.ttf");
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 300;
+  src: url("../fonts/Next-Light.ttf");
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 500;
+  src: url("../fonts/Next-Medium.ttf");
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 700;
+  src: url("../fonts/Next-Bold.ttf");
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 800;
+  src: url("../fonts/Next-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: Next;
+  font-weight: 900;
+  src: url("../fonts/Next-Black.ttf");
+}
+
+
+[x-cloak] {
+  display: none !important;
+}
+
+.ts-wrapper {
+  @apply mt-2;
+}
+
+.ts-control {
+  @apply !pr-10;
+}
+
+.input-text {
+  @apply rounded-lg disabled:bg-gray-200 text-light-gray-700 border-light-gray-300 focus:ring-0 focus:border-light-gray-300;
+}
+
+.input-select {
+  @apply rounded-lg disabled:bg-gray-200 text-light-gray-700 border-light-gray-300 focus:ring-0 focus:border-light-gray-300;
+}
+
+.choices__inner {
+  @apply px-5 bg-white rounded-lg text-light-gray-700 border-light-gray-300 focus:ring-0 focus:border-light-gray-300;
+}
+
+.choices__list--single {
+  @apply mr-4;
+}
+
+.choices__item {
+  @apply text-[1rem] font-normal;
+}
+
+.jcalendar-input {
+  background-image: url('../../../../wwwroot/icons/date.svg');
+  background-position: 4%;
+  padding-left: 0.75rem;
+}
+
+
+.jcalendar-input:disabled {
+  background-image: url('../../../../wwwroot/icons/date-disabled.svg');
+  background-position: 4%;
+  padding-left: 0.75rem;
+}
+
+
+.choices {
+  @apply w-full my-auto;
+}
+
+.input-error {
+  @apply border-red-600 !important;
+}
+
+
+.swal2-validation-message {
+  @apply !text-red-500 !bg-white;
+}
+
+.swal2-show {
+  animation: none !important;
+}
+
+div:where(.swal2-icon).swal2-warning.swal2-icon-show {
+  animation: none !important;
+}
+
+
+.reset-button {
+  @apply text-white rounded-lg w-44 bg-primary hover:bg-primary disabled:bg-gray-200 disabled:text-gray-600;
+}
+
+.tabulator {
+  @apply bg-transparent;
+}
+
+.tabulator .tabulator-tableholder .tabulator-table {
+  @apply bg-white;
+}
+
+.tabulator .tabulator-header .tabulator-col {
+  @apply text-center bg-transparent;
+}
+
+.tabulator .tabulator-header {
+  @apply text-center bg-transparent;
+
+}
+
+.tabulator.tabulator-rtl .tabulator-row .tabulator-cell {
+  @apply text-base leading-5 text-center text-gray-600 border-l-0 border-r-0;
+}
+
+.tabulator-row {
+  @apply border-b border-gray-200;
+}
+
+.tabulator .tabulator-header {
+  @apply border-gray-200;
+}
+
+
+.tabulator .tabulator-header .tabulator-col .tabulator-col-content {
+  @apply !p-2;
+}
+
+.tabulator .tabulator-header .tabulator-col .tabulator-col-content .tabulator-col-title {
+  @apply flex items-center justify-center h-full p-3 text-base font-medium leading-4 text-center text-gray-500 justify-items-center;
+}
+
+.tabulator-row.tabulator-selected {
+  @apply bg-gray-100;
+}
+
+.tabulator-row.tabulator-selected:hover {
+  @apply bg-gray-100;
+}
+
+.tabulator-row.tabulator-selected input[type="checkbox"] {
+  @apply rounded-sm bg-primary focus:ring-0;
+}
+
+.tabulator-cell input[type="checkbox"] {
+  @apply bg-white border border-gray-500 rounded-sm focus:ring-0;
+}
+
+.tabulator-col-title input[type="checkbox"] {
+  @apply bg-white border border-gray-500 rounded-sm focus:ring-0;
+}
+
+.tabulator-col-title input[type="checkbox"]:checked {
+  @apply rounded-sm bg-primary focus:ring-0;
+
+}
+
+.tabulator-page[data-page='first'], .tabulator-page[data-page='last'], .tabulator-page[data-page='next'], .tabulator-page[data-page='prev'] {
+  display: none !important;
+}
+
+.tabulator .tabulator-footer .tabulator-page.active {
+  @apply bg-[#F0F2F5] text-[#3B4458] rounded-lg border-0;
+}
+
+.tabulator .tabulator-footer .tabulator-page {
+  @apply text-gray-500 bg-transparent border-0;
+}
+
+.tabulator .tabulator-footer .tabulator-paginator {
+  @apply flex justify-center gap-1;
+}
+
+.tabulator .tabulator-footer .tabulator-page:last-of-type, .tabulator .tabulator-footer .tabulator-page[data-page="prev"] {
+  @apply border-0 rounded-lg;
+}
+
+.tabulator .tabulator-footer .tabulator-page:not(.disabled):hover:not(.active) {
+  @apply bg-transparent border-0 rounded-lg text-primary;
+}
+
+.tabulator .tabulator-footer .tabulator-page.active:not(.disabled):hover {
+  @apply bg-[#F0F2F5] text-primary rounded-lg border-0;
+}
