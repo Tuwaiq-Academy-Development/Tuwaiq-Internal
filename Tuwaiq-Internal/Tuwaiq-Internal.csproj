@@ -94,9 +94,6 @@
       <Compile Update="Pages\CheckIdentitiesModel.cs">
         <DependentUpon>CheckIdentities.cshtml</DependentUpon>
       </Compile>
-      <Compile Update="Pages\CompaniesModel.cs">
-        <DependentUpon>Companies.cshtml</DependentUpon>
-      </Compile>
     </ItemGroup>
     
     
