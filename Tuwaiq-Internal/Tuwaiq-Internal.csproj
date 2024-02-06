@@ -91,12 +91,18 @@
     
 
     <ItemGroup>
-      <Compile Update="Pages\CategoriesModel.cs">
-        <DependentUpon>Categories.cshtml</DependentUpon>
+      <Compile Update="Pages\CheckIdentitiesModel.cs">
+        <DependentUpon>CheckIdentities.cshtml</DependentUpon>
       </Compile>
       <Compile Update="Pages\CompaniesModel.cs">
         <DependentUpon>Companies.cshtml</DependentUpon>
       </Compile>
+    </ItemGroup>
+    
+    
+
+    <ItemGroup>
+      <Folder Include="wwwroot\templates\" />
     </ItemGroup>
 
 </Project>

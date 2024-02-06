@@ -1,4 +1,4 @@
-namespace TuwaiqRecruitment.Helper;
+namespace TuwaiqInternal.Helper;
 
 public interface IGoogleReCaptcha
 {

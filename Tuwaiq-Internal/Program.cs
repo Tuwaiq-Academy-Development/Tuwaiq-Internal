@@ -12,8 +12,8 @@ using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using OpenIddict.Abstractions;
-using TuwaiqRecruitment.Data;
-using TuwaiqRecruitment.Helper;
+using TuwaiqInternal.Data;
+using TuwaiqInternal.Helper;
 using Vite.AspNetCore.Extensions;
 
 
@@ -148,18 +148,6 @@ builder.Services.AddAuthentication(options =>
             var claims = e.Principal.Claims.ToList(); 
             var userIdClaim = claims.FirstOrDefault(c => c.Type == OpenIddictConstants.Claims.Subject)?.Value?? claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             Guid.TryParse(userIdClaim, out var companyId);
-            var dbContextCompanies = dbContext.Companies.AsEnumerable().FirstOrDefault(c => c.Users != null && c.Users.Contains(companyId))!;
-            var company = dbContextCompanies;
-            if (company != null)
-            {
-                claims.Add(new Claim("company_id", company.Id.ToString()));
-                claims.Add(new Claim("company_name", company.Name));
-                if (! string.IsNullOrEmpty(company.Logo ))
-                {
-                    var logo = "/Storage/"+ company?.Logo;
-                    claims.Add(new Claim("company_logo", logo));
-                }
-            }
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             e.Principal = new ClaimsPrincipal(identity);
             await Task.CompletedTask;
@@ -200,11 +188,11 @@ app.UseAuthorization();
 // app.UseMiddleware<AddCompanyClaimsMiddleware>();
 
 
-app.MapRazorPages().RequireAuthorization();
+app.MapRazorPages();//.RequireAuthorization();
 
-app.MapControllers().RequireAuthorization();
+app.MapControllers();//.RequireAuthorization();
 
-app.MapDefaultControllerRoute().RequireAuthorization();
+app.MapDefaultControllerRoute();//.RequireAuthorization();
 
 // if (app.Environment.IsDevelopment())
 // {

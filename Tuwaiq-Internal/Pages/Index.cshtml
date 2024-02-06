@@ -5,29 +5,10 @@
 }
 
 <div x-data="indexData" x-cloak>
-    <div class="max-w-4xl py-8 mx-auto bg-white shadow-sm min-h-[70vh] rounded-3xl flex flex-col gap-4">
-        <div class="flex justify-between px-4">
+    <div class="w-full py-8 mx-auto bg-white shadow-sm min-h-[70vh] rounded-3xl flex flex-col gap-4">
+        <div class="relative w-full min-w-[400px]">  
+            <div x-ref="table" class="px-2"></div>
 
-            <h1 class="text-2xl font-medium">
-                أسماء المرشحين
-            </h1>
-
-            <div>
-                <button
-                    class="px-4 py-2 text-white transition-all duration-300 ease-in-out shadow rounded-2xl bg-primary hover:scale-110"
-                    x-on:click="showSearchByIdModal()">
-                    البحث برقم الهوية
-                </button>
-                
-                @if (User.IsInRole("admin"))
-                {
-                    <a asp-page="./candidateCreate" 
-                       class="px-4 py-2 text-white transition-all duration-300 ease-in-out shadow rounded-2xl bg-primary hover:scale-110"
-                    >اضافة مرشح</a>
-                }
-            </div>
-            
         </div>
-        <div x-ref="candidatesTable"></div>
     </div>
 </div>

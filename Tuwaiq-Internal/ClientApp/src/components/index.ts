@@ -1,136 +1,184 @@
-import { TabulatorFull as Tabulator } from 'tabulator-tables';
-import Swal from 'sweetalert2';
-import { ILayout } from './layout';
-import { Candidate } from '../types/global';
+import {ILayout} from './layout';
 import axios from 'axios';
+import {any} from "zod";
+import {toastError, toastSuccess} from "../../config/toastifyConfig";
+import * as ExcelJS from "exceljs";
+import {TabulatorFull as Tabulator} from "tabulator-tables";
+import {convertToDateStr} from "../helpers/convertToDate";
 
 interface IComponent extends Partial<ILayout> {
-    candidates: Candidate[];
-    showSearchByIdModal: () => Promise<void>;
+    initTabulator(): void;
+
+    candidates: string;
+    file: any;
+    table: Tabulator | null;
+
+    checkStatus( id): void;
 }
 
 const component: IComponent = {
-    candidates: [
-        // {
-        //     id: "123847191",
-        //     name: 'احمد محمد',
-        // },
-        // {
-        //     id: "3456789876",
-        //     name: 'محمد احمد',
-        // },
-        // {
-        //     id: "019239017",
-        //     name: 'محمد علي',
-        // }
-    ],
+    file: any,
+    table: null,
+    candidates: "",
     async init() {
-        this.isLoading = false;
-        this.route = {
-            name: 'المرشحين',
-            url: 'index'
-        }
-        const table = new Tabulator(this.$refs.candidatesTable, {
+        this.setCurrentRoute!('index', 'index');
+
+        this.initTabulator();
+    },
+
+    initTabulator: function () {
+        const template = document.createElement('template');
+        template.innerHTML = '<div style="display:inline-block;" class="d-flex flex-row">' +
+            '<div>جاري التحميل... </div>' +
+            '<div class="ml-2 activity-sm" data-role="activity" data-type="atom" data-style="dark"></div>' +
+            '</div>';
+        const dataLoaderLoading = template.content.firstChild as HTMLElement;
+
+        this.table = new Tabulator(this.$refs.table, {
             height: "100%",
-            layout: "fitColumns",
+            layout: 'fitColumns',
             textDirection: "rtl",
-            placeholder: "لا توجد بيانات",
+            ajaxURL: `${document.location.origin}/api/Candidate/GetHistory`,
             pagination: true,
             paginationMode: "remote",
-            paginationSize: 20,
-            ajaxURL: `${document.location.origin}/api/candidate/Get`,
+            paginationSize: 10,
+            ajaxConfig: {
+                method: "GET",
+                headers: {
+                    "my-x-12s4": `${window.token}`,
+                },
+            },
+            ajaxFiltering: false,
+            ajaxSorting: false,
+            ajaxParams: () => {
+                return {
+                    // query: this.model_search
+                };
+            },
             ajaxLoader: true,
-            dataSendParams: {
-                "size": "pageSize", //change page request parameter to "pageNo"
-            },
-            dataReceiveParams: {
-                'last_page': 'lastPage'
-            },
-            // paginationCounter: "rows",
+            placeholder: "لا توجد بيانات",
+            dataLoaderLoading: dataLoaderLoading,
             columns: [
-                { title: '#', formatter: 'rownum', width: 40, hozAlign: 'center', headerSort: false, frozen: true },
-                { title: 'الهوية', field: 'nationalId', headerSort: false },
-                { title: 'تم التقييم', field: 'isReviewed', formatter: 'tickCross', hozAlign: 'center', headerSort: false, width: 100 },
-                { title: 'مهتم', field: 'isSelected', formatter: 'tickCross', hozAlign: 'center', headerSort: false, width: 80 },
-                // { title: 'الأسم', field: 'name' },
+                {
+                    title: 'رقم المستخدم', field: 'userId', headerSort: false,
+                    formatter: function (cell) {
+                        return `
+						<div class="flex justify-center items-center">
+							<div class="text-black leading-5">
+								${cell.getValue()}
+							</div>
+						</div>`
+                    }
+                },
+                {
+                    title: 'اسم المستخدم', field: 'firstName', headerSort: false,
+                    formatter: function (cell) {
+                        if (cell.getValue() == null) return '';
+                        return `
+						<div class="flex justify-center items-center">
+							<div class="text-black leading-5">
+								${cell.getValue()}
+							</div>
+						</div>`
+                    }
+                },
+                {
+                    title: 'الرابط', field: 'fileUrl', headerSort: false,
+                    formatter: function (cell) {
+                        if (cell.getValue() == null) return '';
+                        return `
+						<div class="flex justify-center items-center">
+							<div class="text-black leading-5">
+								${cell.getValue()}
+							</div>
+						</div>`
+                    }
+                },
+                {
+                    title: 'الحاله', field: 'status', headerSort: false,
+                    formatter: function (cell) {
+                        if (cell.getValue() == null) return '';
+                        return `
+						<div class="flex justify-center items-center">
+							<div class="text-black leading-5">
+								${cell.getValue()}
+							</div>
+						</div>`
+                    }
+                },
+       
+                {
+                    title: 'تاريخ الانشاء', field: 'createdOn', headerSort: false,
+                    formatter: function (cell) {
+                        if (cell.getValue() == null) return '';
+                        return `
+						<div class="flex justify-center items-center">
+							<div class="text-black leading-5">
+								${convertToDateStr(cell.getValue())}
+							</div>
+						</div>`
+                    }
+                },
+
+                {
+                    title: 'تاريخ اخر تحديث', field: 'lastUpdate', headerSort: false,
+                    formatter: function (cell) {
+                        if (cell.getValue() == null) return '';
+                        return `
+						<div class="flex justify-center items-center">
+							<div class="text-black leading-5">
+								${convertToDateStr(cell.getValue())}
+							</div>
+						</div>`
+                    }
+                },
+                {
+                    title: 'نوع المستعلم', field: 'type', headerSort: false,
+                    formatter: function (cell) {
+                        if (cell.getValue() == null) return '';
+                        return `
+						<div class="flex justify-center items-center">
+							<div class="text-black leading-5">
+							<template x-if="'${cell.getValue()}'==1">
+							<div class="text-black leading-5">
+								Hadaf
+							</div>
+					         </template>
+							</div>
+						</div>`
+                    }
+                },
+                //action
+                {
+                    title: 'الإجراءات', headerSort: false,
+                    cellClick: (e, cell) => {
+                        const data = cell.getRow().getData();
+                        this.checkStatus(cell.getRow().getData().id);
+
+                    },
+                    formatter: function (cell) {
+                        return `
+                        <div class="flex justify-center items-center"> 
+                                <button  class="btn-primary"  >check </button> 
+                            </div>`
+                    }
+                },
+
+
             ],
         });
 
-        table.on('rowClick', (e, row) => {
-            const data = row.getData();
-            window.location.href = `/candidate/${data.nationalId}`;
-        });
+        // this.table.on("rowClick", (e, row) => {
+        //     if (e.target.classList.contains("w-7")) return;
+        //     location.href = document.location.origin + "/" + "Initiatives/InitiativePublishes/" + row.getData()["id"];
+        // })
+
 
     },
-    async showSearchByIdModal() {
-        await Swal.fire({
-            title: 'أدخل رقم الهوية',
-            input: 'text',
-            inputLabel: 'رقم الهوية',
-            inputPlaceholder: 'أدخل رقم الهوية',
-            inputValue: '',
-            cancelButtonText: 'إلغاء',
-            confirmButtonText: 'بحث',
-            confirmButtonColor: '#6A5C9F',
-            showLoaderOnConfirm: true,
-            showCancelButton: true,
-            inputValidator: (value) => {
-                if (!value) {
-                    return 'يجب أدخال رقم الهوية'
-                }
-            },
-            preConfirm: async (id) => {
-                try {
-                    const response = await axios.get(`${document.location.origin}/api/candidate/GetCandidate`, {
-                        params: {
-                            nationalId: id,
-                        }
-                    });
-
-                    if (!response || response.status !== 200 || !response.data) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'خطأ',
-                            text: 'لم يتم العثور على مرشح بهذا الرقم',
-                        })
-                        return;
-                    }
-
-                    window.location.href = `/candidate/${response.data.nationalId}`;
-                } catch (error) {
-                    Swal.showValidationMessage(`لم يتم العثور على مرشح بهذا الرقم`);
-                }
-            },
-        })
-
-        // if (id) {
-        //     try {
-        //
-        //         const response = await axios.get(`${document.location.origin}/api/candidate/GetCandidate`, {
-        //             params: {
-        //                 nationalId: id,
-        //             }
-        //         });
-        //
-        //         if (!response || response.status !== 200 || !response.data) {
-        //             Swal.fire({
-        //                 icon: 'error',
-        //                 title: 'خطأ',
-        //                 text: 'لم يتم العثور على مرشح بهذا الرقم',
-        //             })
-        //             return;
-        //         }
-        //
-        //         window.location.href = `/candidate/${response.data.nationalId}`;
-        //     }
-        //     catch (e) {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'خطأ',
-        //             text: 'لم يتم العثور على مرشح بهذا الرقم',
-        //         })
-        //     }
-        // }
+    checkStatus: function (id) {
+       console.log(id);
+        axios.post(`/api/Candidate/UpdateStatus?id=`+id);
+        this.initTabulator();
     }
 };
 export default () => component;

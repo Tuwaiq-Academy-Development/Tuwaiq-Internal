@@ -204,27 +204,21 @@
                     <ul class="flex flex-col w-full gap-2">
                         <li>
                             <a asp-page="/" class="flex items-center w-full gap-6 px-6 py-2 rounded-xl"
-                                :class="route.url === 'index' ? 'bg-[#E8E8EF]' : 'bg-white'">
+                                 x-on:click="setCurrentRoute( 'index','index')"
+                                :class="getRouteUrl() === 'index' ? 'bg-[#E8E8EF]' : 'bg-white'">
 
-                                <h4 class="items-center flex-1 text-lg text-light-gray-700">المرشحين</h4>
+                                <h4 class="items-center flex-1 text-lg text-light-gray-700">سجل الاستعلامات</h4>
                             </a>
-                        </li>
-                       @if (User.IsInRole("admin"))
-                        {
-                            <li>
-                                <a asp-page="/companies" class="flex items-center w-full gap-6 px-6 py-2 rounded-xl"
-                                   :class="route.url === 'companies' ? 'bg-[#E8E8EF]' : 'bg-white'">
-                                    <h4 class="items-center flex-1 text-lg text-light-gray-700">الجهات</h4>
-                                </a>
-                            </li>
+                        </li> 
                         <li>
-                            <a asp-page="/categories" class="flex items-center w-full gap-6 px-6 py-2 rounded-xl"
-                                :class="route.url === 'categories' ? 'bg-[#E8E8EF]' : 'bg-white'">
-
-                                <h4 class="items-center flex-1 text-lg text-light-gray-700">التخصصات</h4>
-                            </a>
-                        </li>
-                        }
+                            <a asp-page="CheckIdentities" class="flex items-center w-full gap-6 px-6 py-2 rounded-xl"
+                                x-on:click="setCurrentRoute( 'CheckIdentities','CheckIdentities')"
+                                                             :class="getRouteUrl() === 'CheckIdentities' ? 'bg-[#E8E8EF]' : 'bg-white'">
+                             
+                                                             <h4 class="items-center flex-1 text-lg text-light-gray-700">التأكد من الهويات</h4>
+                           </a>
+                         </li>
+                    
                     </ul>
                 </div>
             </div>

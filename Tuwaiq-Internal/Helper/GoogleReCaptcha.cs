@@ -1,7 +1,7 @@
 using System.Net;
 using Newtonsoft.Json.Linq;
 
-namespace TuwaiqRecruitment.Helper;
+namespace TuwaiqInternal.Helper;
 
 public class GoogleReCaptcha : IGoogleReCaptcha
 {
