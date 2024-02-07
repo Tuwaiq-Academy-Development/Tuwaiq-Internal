@@ -1,4 +1,6 @@
 ﻿@using OpenIddict.Abstractions
+@using global::Shared.Extensions
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -16,7 +18,17 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="whites" />
+    
+     <link rel="apple-touch-icon" href="https://tuwaiqdev.com/img/logo.jpeg"/>
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/img/logo.svg"/>
+    <link rel="icon" type="image/png" href="~/img/logo.svg"/>
+    
     <title>برنامج طويق للمهام المستعجلة</title>
+    <script>
+    window.base_url= '@Context.Request.BaseUrl()';
+    window.token = '@AntiForgery.GetAndStoreTokens(ViewContext.HttpContext).RequestToken';
+    </script>
 
 
     @* if development *@
@@ -173,9 +185,9 @@
                                  :class="{'border-indigo-700 transform transition duration-300 ': openUser }">
                                 <div class="flex items-center justify-center space-x-4 cursor-pointer gap-x-4">
                                     <div class=" flex flex-col text-secondary items-center justify-center">
-                                        <img src="@User.GetClaim("company_logo")" alt=""
+                                        <img src="logo.jpeg" alt=""
                                              class="object-cover w-12 h-12 border-gray-900 rounded-full shadow border-1">
-                                        @User.GetClaim("company_name")
+                                        @User.GetClaim("name")
                                     </div>
                                 </div>
                                 <div x-show="openUser" x-on:click.away="openUser=false" x-transition
@@ -210,15 +222,7 @@
                                 <h4 class="items-center flex-1 text-lg text-light-gray-700">سجل الاستعلامات</h4>
                             </a>
                         </li> 
-                        <li>
-                            <a asp-page="CheckIdentities" class="flex items-center w-full gap-6 px-6 py-2 rounded-xl"
-                                x-on:click="setCurrentRoute( 'CheckIdentities','CheckIdentities')"
-                                                             :class="getRouteUrl() === 'CheckIdentities' ? 'bg-[#E8E8EF]' : 'bg-white'">
-                             
-                                                             <h4 class="items-center flex-1 text-lg text-light-gray-700">التأكد من الهويات</h4>
-                           </a>
-                         </li>
-                    
+                       
                     </ul>
                 </div>
             </div>

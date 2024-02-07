@@ -25,6 +25,7 @@
     "alpinejs": "^3.13.2",
     "axios": "^1.6.2",
     "child_process": "^1.0.2",
+    "dayjs": "^1.11.10",
     "exceljs": "^4.4.0",
     "flowbite": "^2.2.1",
     "fs": "^0.0.1-security",

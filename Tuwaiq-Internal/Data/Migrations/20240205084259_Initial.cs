@@ -49,34 +49,34 @@ namespace TuwaiqRecruitment.Data.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.CreateTable(
-                name: "ToBeChecked",
-                columns: table => new
-                {
-                    NationalId = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    FirstName = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    SecondName = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ThirdName = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    FourthName = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    LastName = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    IsChecked = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    CheckedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Response = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    IsRegistered = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ToBeChecked", x => x.NationalId);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+            // migrationBuilder.CreateTable(
+            //     name: "ToBeChecked",
+            //     columns: table => new
+            //     {
+            //         NationalId = table.Column<string>(type: "varchar(255)", nullable: false)
+            //             .Annotation("MySql:CharSet", "utf8mb4"),
+            //         FirstName = table.Column<string>(type: "longtext", nullable: true)
+            //             .Annotation("MySql:CharSet", "utf8mb4"),
+            //         SecondName = table.Column<string>(type: "longtext", nullable: true)
+            //             .Annotation("MySql:CharSet", "utf8mb4"),
+            //         ThirdName = table.Column<string>(type: "longtext", nullable: true)
+            //             .Annotation("MySql:CharSet", "utf8mb4"),
+            //         FourthName = table.Column<string>(type: "longtext", nullable: true)
+            //             .Annotation("MySql:CharSet", "utf8mb4"),
+            //         LastName = table.Column<string>(type: "longtext", nullable: true)
+            //             .Annotation("MySql:CharSet", "utf8mb4"),
+            //         IsChecked = table.Column<bool>(type: "tinyint(1)", nullable: false),
+            //         CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+            //         CheckedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+            //         Response = table.Column<string>(type: "longtext", nullable: true)
+            //             .Annotation("MySql:CharSet", "utf8mb4"),
+            //         IsRegistered = table.Column<int>(type: "int", nullable: false)
+            //     },
+            //     constraints: table =>
+            //     {
+            //         table.PrimaryKey("PK_ToBeChecked", x => x.NationalId);
+            //     })
+            //     .Annotation("MySql:CharSet", "utf8mb4");
         }
 
         /// <inheritdoc />
@@ -85,8 +85,8 @@ namespace TuwaiqRecruitment.Data.Migrations
             migrationBuilder.DropTable(
                 name: "ChecksHistory");
 
-            migrationBuilder.DropTable(
-                name: "ToBeChecked");
+            // migrationBuilder.DropTable(
+            //     name: "ToBeChecked");
         }
     }
 }

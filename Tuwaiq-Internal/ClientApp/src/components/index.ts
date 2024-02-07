@@ -1,19 +1,17 @@
 import {ILayout} from './layout';
-import axios from 'axios';
 import {any} from "zod";
-import {toastError, toastSuccess} from "../../config/toastifyConfig";
 import * as ExcelJS from "exceljs";
 import {TabulatorFull as Tabulator} from "tabulator-tables";
 import {convertToDateStr} from "../helpers/convertToDate";
+import {myAxios} from "../config/axiosConfig";
+import dayjs from "dayjs";
 
 interface IComponent extends Partial<ILayout> {
     initTabulator(): void;
-
     candidates: string;
     file: any;
     table: Tabulator | null;
-
-    checkStatus( id): void;
+    checkStatus(id): Promise<void>;
 }
 
 const component: IComponent = {
@@ -22,11 +20,9 @@ const component: IComponent = {
     candidates: "",
     async init() {
         this.setCurrentRoute!('index', 'index');
-
         this.initTabulator();
     },
-
-    initTabulator: function () {
+    initTabulator() {
         const template = document.createElement('template');
         template.innerHTML = '<div style="display:inline-block;" class="d-flex flex-row">' +
             '<div>جاري التحميل... </div>' +
@@ -38,7 +34,7 @@ const component: IComponent = {
             height: "100%",
             layout: 'fitColumns',
             textDirection: "rtl",
-            ajaxURL: `${document.location.origin}/api/Candidate/GetHistory`,
+            ajaxURL: `${window.base_url}api/Checks/GetHistory`,
             pagination: true,
             paginationMode: "remote",
             paginationSize: 10,
@@ -59,17 +55,17 @@ const component: IComponent = {
             placeholder: "لا توجد بيانات",
             dataLoaderLoading: dataLoaderLoading,
             columns: [
-                {
-                    title: 'رقم المستخدم', field: 'userId', headerSort: false,
-                    formatter: function (cell) {
-                        return `
-						<div class="flex justify-center items-center">
-							<div class="text-black leading-5">
-								${cell.getValue()}
-							</div>
-						</div>`
-                    }
-                },
+                // {
+                //     title: 'رقم المستخدم', field: 'userId', headerSort: false,
+                //     formatter: function (cell) {
+                //         return `
+				// 		<div class="flex justify-center items-center">
+				// 			<div class="text-black leading-5">
+				// 				${cell.getValue()}
+				// 			</div>
+				// 		</div>`
+                //     }
+                // },
                 {
                     title: 'اسم المستخدم', field: 'firstName', headerSort: false,
                     formatter: function (cell) {
@@ -87,15 +83,16 @@ const component: IComponent = {
                 //     formatter: function (cell) {
                 //         if (cell.getValue() == null) return '';
                 //         return `
-				// 		<div class="flex justify-center items-center">
-				// 			<div class="text-black leading-5">
-				// 				${cell.getValue()}
-				// 			</div>
-				// 		</div>`
+                // 		<div class="flex justify-center items-center">
+                // 			<div class="text-black leading-5">
+                // 				${cell.getValue()}
+                // 			</div>
+                // 		</div>`
                 //     }
                 // },
                 {
                     title: 'الحاله', field: 'status', headerSort: false,
+                    width: 200,
                     formatter: function (cell) {
                         if (cell.getValue() == null) return '';
                         return `
@@ -106,15 +103,16 @@ const component: IComponent = {
 						</div>`
                     }
                 },
-       
+
                 {
                     title: 'تاريخ الانشاء', field: 'createdOn', headerSort: false,
+                    width: 300,
                     formatter: function (cell) {
                         if (cell.getValue() == null) return '';
                         return `
 						<div class="flex justify-center items-center">
-							<div class="text-black leading-5">
-								${convertToDateStr(cell.getValue())}
+							<div class="text-black leading-5" dir="ltr">
+								${dayjs(cell.getValue()).format('DD-MM-YYYY hh:mm a')}
 							</div>
 						</div>`
                     }
@@ -122,18 +120,20 @@ const component: IComponent = {
 
                 {
                     title: 'تاريخ اخر تحديث', field: 'lastUpdate', headerSort: false,
+                    width: 300,
                     formatter: function (cell) {
                         if (cell.getValue() == null) return '';
                         return `
 						<div class="flex justify-center items-center">
-							<div class="text-black leading-5">
-								${convertToDateStr(cell.getValue())}
+							<div class="text-black leading-5" dir="ltr">
+								${dayjs(cell.getValue()).format('DD-MM-YYYY hh:mm a')}
 							</div>
 						</div>`
                     }
                 },
                 {
-                    title: 'نوع المستعلم', field: 'type', headerSort: false,
+                    title: 'نوع الاستعلام', field: 'type', headerSort: false,
+                    width: 200,
                     formatter: function (cell) {
                         if (cell.getValue() == null) return '';
                         return `
@@ -141,7 +141,7 @@ const component: IComponent = {
 							<div class="text-black leading-5">
 							<template x-if="'${cell.getValue()}'==1">
 							<div class="text-black leading-5">
-								Hadaf
+								التأمينات الاجتماعية
 							</div>
 					         </template>
 							</div>
@@ -150,16 +150,19 @@ const component: IComponent = {
                 },
                 //action
                 {
-                    title: 'الإجراءات', headerSort: false,
+                    title: 'الإجراءات', headerSort: false, width: 100,
                     cellClick: (e, cell) => {
                         const data = cell.getRow().getData();
                         this.checkStatus(cell.getRow().getData().id);
-
                     },
                     formatter: function (cell) {
+                       const data = cell.getRow().getData().status.split("/");
+                       if(data[0] == data[1]) {
+                           return 'تم الانتهاء'
+                       }
                         return `
                         <div class="flex justify-center items-center"> 
-                                <button  class="btn-primary"  >check </button> 
+                                <button  class="w-full h-7 rounded-full flex justify-center items-center bg-gray-200 hover:bg-gray-400"  >تحديث </button> 
                             </div>`
                     }
                 },
@@ -175,11 +178,9 @@ const component: IComponent = {
 
 
     },
-    checkStatus: function (id) {
-       console.log(id);
-        axios.post(`/api/Candidate/UpdateStatus?id=`+id);
-        this.initTabulator();
-        this.table.setData();
+    async checkStatus(id) {
+        await myAxios.post(`api/Checks/UpdateStatus?id=` + id);
+        this.table?.replaceData();
     }
 };
 export default () => component;

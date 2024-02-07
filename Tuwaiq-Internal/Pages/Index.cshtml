@@ -5,8 +5,13 @@
 }
 
 <div x-data="indexData" x-cloak>
-    <div class="w-full py-8 mx-auto bg-white shadow-sm min-h-[70vh] rounded-3xl flex flex-col gap-4">
-        <div class="relative w-full min-w-[400px]">  
+    <div class="w-full py-8 mx-auto bg-white shadow-sm min-h-[70vh] rounded-3xl flex flex-col gap-4 p-10">
+        <div class="relative w-full min-w-[400px] space-y-10">  
+            <div class="flex items-center justify-between">
+                <a asp-page="/CheckIdentities" class="bg-gray-600 px-3 py-2 rounded text-white">
+                    استعلام جديد
+                </a>
+            </div>
             <div x-ref="table" class="px-2"></div>
 
         </div>

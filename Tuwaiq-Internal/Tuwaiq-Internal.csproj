@@ -20,20 +20,17 @@
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+      <Content Update="wwwroot\favicon.ico">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
+
     <ItemGroup>
-        <None Update="tuwaiqdev-enc.pfx">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="tuwaiqdev-sign.pfx">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-        <None Update="tuwaiq.pfx">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
+        <Content Include="tuwaiq.pfx" CopyToPublishDirectory="PreserveNewest" />
+        <Content Include="tuwaiqdev.pfx" CopyToPublishDirectory="PreserveNewest" />
+        <Content Include="tuwaiqadmin.pfx" CopyToPublishDirectory="PreserveNewest" />
     </ItemGroup>
-    
     
 
     <ItemGroup>
@@ -42,6 +39,8 @@
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.0" />
     <PackageReference Include="OpenIddict.AspNetCore" Version="4.10.1" />
 
+        <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="7.0.14" />
+        <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="7.0.14" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.14">
@@ -72,22 +71,10 @@
     <ItemGroup>
       <None Include="wwwroot\Storage\3x5qdao1qdi.png" />
     </ItemGroup>
-    
-    
 
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="wwwroot\Storage\3x5qdao1qdi.png" />
-      <_ContentIncludedByDefault Remove="publish\appsettings.Development.json" />
-      <_ContentIncludedByDefault Remove="publish\appsettings.json" />
-      <_ContentIncludedByDefault Remove="publish\ClientApp\package.json" />
-      <_ContentIncludedByDefault Remove="publish\ClientApp\src\data.json" />
-      <_ContentIncludedByDefault Remove="publish\ClientApp\tsconfig.json" />
-      <_ContentIncludedByDefault Remove="publish\TuwaiqRecruitment.deps.json" />
-      <_ContentIncludedByDefault Remove="publish\TuwaiqRecruitment.runtimeconfig.json" />
-      <_ContentIncludedByDefault Remove="publish\wwwroot\assets.manifest.json" />
-      <_ContentIncludedByDefault Remove="Pages\Admin\Create.cshtml" />
-    </ItemGroup>
-    
+
+
+
     
 
     <ItemGroup>

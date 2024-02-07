@@ -159,49 +159,6 @@ body {
   margin: 0 !important;
 }
 
-@font-face {
-  font-family: Next;
-  font-weight: 400;
-  src: url("../fonts/Next.ttf");
-}
-
-@font-face {
-  font-family: Next;
-  font-weight: 200;
-  src: url("../fonts/Next-ExtraLight.ttf");
-}
-
-@font-face {
-  font-family: Next;
-  font-weight: 300;
-  src: url("../fonts/Next-Light.ttf");
-}
-
-@font-face {
-  font-family: Next;
-  font-weight: 500;
-  src: url("../fonts/Next-Medium.ttf");
-}
-
-@font-face {
-  font-family: Next;
-  font-weight: 700;
-  src: url("../fonts/Next-Bold.ttf");
-}
-
-@font-face {
-  font-family: Next;
-  font-weight: 800;
-  src: url("../fonts/Next-ExtraBold.ttf");
-}
-
-@font-face {
-  font-family: Next;
-  font-weight: 900;
-  src: url("../fonts/Next-Black.ttf");
-}
-
-
 [x-cloak] {
   display: none !important;
 }
@@ -378,48 +335,6 @@ html {
 body {
   padding: 0 !important;
   margin: 0 !important;
-}
-
-@font-face {
-  font-family: Next;
-  font-weight: 400;
-  src: url("../fonts/Next.ttf");
-}
-
-@font-face {
-  font-family: Next;
-  font-weight: 200;
-  src: url("../fonts/Next-ExtraLight.ttf");
-}
-
-@font-face {
-  font-family: Next;
-  font-weight: 300;
-  src: url("../fonts/Next-Light.ttf");
-}
-
-@font-face {
-  font-family: Next;
-  font-weight: 500;
-  src: url("../fonts/Next-Medium.ttf");
-}
-
-@font-face {
-  font-family: Next;
-  font-weight: 700;
-  src: url("../fonts/Next-Bold.ttf");
-}
-
-@font-face {
-  font-family: Next;
-  font-weight: 800;
-  src: url("../fonts/Next-ExtraBold.ttf");
-}
-
-@font-face {
-  font-family: Next;
-  font-weight: 900;
-  src: url("../fonts/Next-Black.ttf");
 }
 
 

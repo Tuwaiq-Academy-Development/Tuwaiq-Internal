@@ -21,9 +21,11 @@ const CheckIdentities: IComponent = {
 
     },
     async checkIdentities() {
-        await axios.post(`/api/Candidate/CheckIdentities`, this.candidates.split('\n'));
+        this.isLoading = true;
+        await axios.post(`/api/Checks/CheckIdentities`, this.candidates.split('\n'));
         toastSucess('تم الاستعلام علي الهويات بنجاح');
-
+        window.location.href = "/";
+        this.isLoading = false;
     },
     handleImportChange(e: any) {
         this.file = e.target.files[0]
@@ -40,7 +42,6 @@ const CheckIdentities: IComponent = {
                         if (rowNumber !== 1) {
                             row.eachCell((cell) => {
                                 localcandidates += cell.text + '\n';
-                                console.log(cell.text);
                             })
 
                         }

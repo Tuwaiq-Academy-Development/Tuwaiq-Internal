@@ -1,7 +1,10 @@
-﻿@using TuwaiqRecruitment
+﻿@using Microsoft.AspNetCore.Antiforgery
+@using TuwaiqRecruitment
 @using Vite.AspNetCore.Abstractions
 @using Vite.AspNetCore.Services
 
 @namespace TuwaiqRecruitment.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper *, Vite.AspNetCore
+
+@inject IAntiforgery AntiForgery;

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace TuwaiqRecruitment.Pages;
 
-[Authorize(Roles = "admin")]
+[Authorize]
 public class CheckIdentitiesModel : PageModel
 {
     public void OnGet()
