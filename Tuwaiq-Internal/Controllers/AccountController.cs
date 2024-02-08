@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using OpenIddict.Client.AspNetCore;
 using OpenIddict.Abstractions;
 
-namespace TuwaiqRecruitment.Controllers;
+namespace TuwaiqInternal.Controllers;
 
 public class AccountController : Controller
 {

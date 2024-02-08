@@ -5,6 +5,8 @@ import {TabulatorFull as Tabulator} from "tabulator-tables";
 import {convertToDateStr} from "../helpers/convertToDate";
 import {myAxios} from "../config/axiosConfig";
 import dayjs from "dayjs";
+import {api} from '../utils/endpoints';
+import {BASE_URL} from "../config/envConfig";
 
 interface IComponent extends Partial<ILayout> {
     initTabulator(): void;
@@ -12,6 +14,8 @@ interface IComponent extends Partial<ILayout> {
     file: any;
     table: Tabulator | null;
     checkStatus(id): Promise<void>;
+    exportExcel(): any;
+
 }
 
 const component: IComponent = {
@@ -150,7 +154,7 @@ const component: IComponent = {
                 },
                 //action
                 {
-                    title: 'الإجراءات', headerSort: false, width: 100,
+                    title: 'الإجراءات', headerSort: false, width: 150,
                     cellClick: (e, cell) => {
                         const data = cell.getRow().getData();
                         this.checkStatus(cell.getRow().getData().id);
@@ -163,7 +167,9 @@ const component: IComponent = {
                         return `
                         <div class="flex justify-center items-center"> 
                                 <button  class="w-full h-7 rounded-full flex justify-center items-center bg-gray-200 hover:bg-gray-400"  >تحديث </button> 
-                            </div>`
+ <a target="_blank" :href="exportExcel()"  class="w-full h-7 rounded-full flex justify-center items-center bg-gray-200 hover:bg-gray-400">
+                    تصدير
+                </a>                            </div>   `
                     }
                 },
 
@@ -181,6 +187,9 @@ const component: IComponent = {
     async checkStatus(id) {
         await myAxios.post(`api/Checks/UpdateStatus?id=` + id);
         this.table?.replaceData();
-    }
+    } ,
+    async exportExcel() {
+        return   BASE_URL  +api.ExportExcelUrl ;
+     }
 };
 export default () => component;

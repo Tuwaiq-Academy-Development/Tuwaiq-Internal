@@ -36,6 +36,7 @@
     <ItemGroup>
       <PackageReference Include="Hashids.net" Version="1.7.0" />
       <PackageReference Include="IdentityModel.AspNetCore" Version="4.3.0" />
+      <PackageReference Include="libs.XSSFWorkbook" Version="1.0.0" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.0" />
     <PackageReference Include="OpenIddict.AspNetCore" Version="4.10.1" />
 
@@ -87,6 +88,7 @@
 
     <ItemGroup>
       <Folder Include="wwwroot\templates\" />
+      <Folder Include="wwwroot\Templates\" />
     </ItemGroup>
 
 </Project>

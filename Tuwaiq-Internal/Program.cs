@@ -185,8 +185,7 @@ try
     var redisConfig = builder.Configuration.GetSection("Redis").Value;
     
     builder.Services.AddDistributedMemoryCache();
-    
-    builder.Services.AddSingleton<IRedisConnectionFactory>(sp =>
+     builder.Services.AddSingleton<IRedisConnectionFactory>(sp =>
     {
         try
         {
@@ -248,11 +247,11 @@ try
 // app.UseMiddleware<AddCompanyClaimsMiddleware>();
 
 
-    app.MapRazorPages().RequireAuthorization();
+    app.MapRazorPages();//.RequireAuthorization();
 
-    app.MapControllers().RequireAuthorization();
+    app.MapControllers();//.RequireAuthorization();
 
-    app.MapDefaultControllerRoute().RequireAuthorization();
+    app.MapDefaultControllerRoute();//.RequireAuthorization();
     app.MapHealthChecks("/health").AllowAnonymous();
 
 // if (app.Environment.IsDevelopment())

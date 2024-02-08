@@ -10,14 +10,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e950acda-18dc-4aa1-a4d9-8c74ebc22bf7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Tuwaiq-Internal/ClientApp/src/config/toastifyConfig.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tuwaiq-Internal/ClientApp/src/utils/endpoints.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tuwaiq-Internal/Controllers/ExportController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tuwaiq-Internal/Controllers/UploadController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tuwaiq-Internal/Dto/CheckIdentitiesDto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Tuwaiq-Internal/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Tuwaiq-Internal/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tuwaiq-Internal/ClientApp/src/components/CheckIdentities.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Tuwaiq-Internal/ClientApp/src/components/CheckIdentities.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tuwaiq-Internal/ClientApp/src/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Tuwaiq-Internal/ClientApp/src/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tuwaiq-Internal/ClientApp/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tuwaiq-Internal/ClientApp/tailwind.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tuwaiq-Internal/Controllers/CandidateController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tuwaiq-Internal/Controllers/CandidateController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tuwaiq-Internal/ClientApp/src/components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Tuwaiq-Internal/ClientApp/src/components/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tuwaiq-Internal/ClientApp/src/components/layout.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Tuwaiq-Internal/ClientApp/src/components/layout.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tuwaiq-Internal/Controllers/AccountController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tuwaiq-Internal/Controllers/AccountController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tuwaiq-Internal/Controllers/ChecksController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tuwaiq-Internal/Controllers/ChecksController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tuwaiq-Internal/Pages/CheckIdentities.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Tuwaiq-Internal/Pages/CheckIdentities.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tuwaiq-Internal/Pages/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Tuwaiq-Internal/Pages/Shared/_Layout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tuwaiq-Internal/Pages/CheckIdentitiesModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tuwaiq-Internal/Pages/CheckIdentitiesModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tuwaiq-Internal/Pages/Index.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tuwaiq-Internal/Pages/Index.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tuwaiq-Internal/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tuwaiq-Internal/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tuwaiq-Internal/Tuwaiq-Internal.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tuwaiq-Internal/Tuwaiq-Internal.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tuwaiq-Internal/wwwroot/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/Tuwaiq-Internal/wwwroot/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tuwaiq-Internal/wwwroot/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Tuwaiq-Internal/wwwroot/js/main.js" afterDir="false" />
     </list>
@@ -29,13 +36,32 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;moatasemelrouby&quot;
+  }
+}</component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
   </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="da936dea-9f1a-4f64-b9fb-f5da8bef4d60" />
+        <option name="url" value="https://github.com/Tuwaiq-Academy-Development/Tuwaiq-Internal.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://D:/Tuwaiq Projects/Tuwaiq-Internal/Tuwaiq-Internal/Controllers/CandidateController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Tuwaiq Projects/Tuwaiq-Internal/Tuwaiq-Internal/Pages/Index.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Tuwaiq Projects/Tuwaiq-Internal/Tuwaiq-Internal/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/3f1acb59718cadf111a0a796681e3d3509bb3381/src/Mvc/Mvc.Core/src/ControllerBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/3f1acb59718cadf111a0a796681e3d3509bb3381/src/Mvc/Mvc.Core/src/CreatedResult.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/3f1acb59718cadf111a0a796681e3d3509bb3381/src/Mvc/Mvc.Core/src/Infrastructure/ActionMethodExecutor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5abecb93434c4299acd01d522fdf8da2c9a910/2d/b76478b5/Path.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7c05a9f56cce41eba9451cc4a5a099cc138a0/12/3db45997/IHostEnvironment.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8434535ab17b4ddd9a298f1400b077d61be00/3a/9c16887f/IFilesApi.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8434535ab17b4ddd9a298f1400b077d61be00/95/3f361658/FileUploadResult.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/bc8b28a1034e46078fae1109c2d4cb64118a0/2e/2aba1f76/IFormFile.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -48,31 +74,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.Tuwaiq-Internal: http.executor": "Debug",
-    ".NET Launch Settings Profile.Tuwaiq-Internal: https.executor": "Run",
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "ts.external.directory.path": "/Users/ahmed/Desktop/Projects/Tuwaiq-Internal/Tuwaiq-Internal/ClientApp/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.Tuwaiq-Internal: http.executor&quot;: &quot;Debug&quot;,
+    &quot;.NET Launch Settings Profile.Tuwaiq-Internal: https.executor&quot;: &quot;Debug&quot;,
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Tuwaiq Projects\\Tuwaiq-Internal\\Tuwaiq-Internal\\ClientApp\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "/Users/ahmed/Library/Application Support/JetBrains/Rider2023.3/resharper-host/DecompilerCache",
-      "/Users/ahmed/Library/Application Support/JetBrains/Rider2023.3/resharper-host/SourcesCache",
-      "/Users/ahmed/.local/share/Symbols/src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\ThinkPad\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\ThinkPad\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\ThinkPad\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Tuwaiq-Internal: https">
     <configuration name="Tuwaiq-Internal: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Tuwaiq-Internal/Tuwaiq-Internal.csproj" />
@@ -136,6 +162,10 @@
       <workItem from="1707214391773" duration="82000" />
       <workItem from="1707214609410" duration="695000" />
       <workItem from="1707232875738" duration="2347000" />
+      <workItem from="1707383032034" duration="3000" />
+      <workItem from="1707387195475" duration="604000" />
+      <workItem from="1707387976980" duration="12703000" />
+      <workItem from="1707402513548" duration="6919000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -152,6 +182,18 @@
     <option name="version" value="3" />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
+    <option name="SHOW_OTHER_BRANCHES" value="true" />
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -179,6 +221,19 @@
           <line>94</line>
           <properties documentPath="D:\Tuwaiq Projects\Tuwaiq-Internal\Tuwaiq-Internal\Controllers\CandidateController.cs" initialLine="91" containingFunctionPresentation="Method 'UpdateStatus'" />
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Tuwaiq-Internal/Controllers/ChecksController.cs</url>
+          <line>18</line>
+          <properties documentPath="D:\Tuwaiq Projects\Tuwaiq-Internal\Tuwaiq-Internal\Controllers\ChecksController.cs" initialLine="17" containingFunctionPresentation="Method 'CheckIdentities'">
+            <startOffsets>
+              <option value="520" />
+            </startOffsets>
+            <endOffsets>
+              <option value="521" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

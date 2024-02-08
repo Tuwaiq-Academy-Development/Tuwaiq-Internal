@@ -5,16 +5,17 @@ import * as ExcelJS from "exceljs";
 import {toastSucess} from "../config/toastifyConfig";
 
 interface IComponent extends Partial<ILayout> {
- 
+
     checkIdentities: () => Promise<void>;
-    handleImportChange: (e: any) => void;
+      handleImportChange: (e: any) => void;
     candidates: string;
-    file: any; 
+    file: any;
+    files:any;
 }
 
 const CheckIdentities: IComponent = {
     file: any,
-   
+    files:any,
     candidates: "",
     async init() {
         this.setCurrentRoute!('CheckIdentities', 'CheckIdentities');
@@ -22,13 +23,22 @@ const CheckIdentities: IComponent = {
     },
     async checkIdentities() {
         this.isLoading = true;
-        await axios.post(`/api/Checks/CheckIdentities`, this.candidates.split('\n'));
+        
+        const response = await this.uploadFile!(this.files);
+    var model={
+        nationalIds: this.candidates.split('\n'),
+
+        FilePath: response.data.fileNames[this.file.name],
+        
+    }
+        await axios.post(`/api/Checks/CheckIdentities`,model);
         toastSucess('تم الاستعلام علي الهويات بنجاح');
         window.location.href = "/";
         this.isLoading = false;
     },
-    handleImportChange(e: any) {
-        this.file = e.target.files[0]
+  async  handleImportChange(e: any) {
+        this.file = e.target.files[0];
+        this.files=e.target.files;
         e.preventDefault();
         const wb = new ExcelJS.Workbook();
         const reader = new FileReader();
@@ -53,6 +63,6 @@ const CheckIdentities: IComponent = {
             })
         }
     },
- 
+
 };
 export default () => CheckIdentities;

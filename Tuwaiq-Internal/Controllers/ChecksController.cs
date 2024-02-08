@@ -4,20 +4,21 @@ using Newtonsoft.Json;
 using Shared.Extensions;
 using TuwaiqInternal.Helper;
 using TuwaiqInternal.Data;
+using TuwaiqInternal.Dto;
 using TuwaiqInternal.Data.Enums;
 
-namespace TuwaiqRecruitment.Controllers;
+namespace TuwaiqInternal.Controllers;
 
-[Authorize]
+//[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class ChecksController(ApplicationDbContext context) : Controller
 {
     [HttpPost("[action]")]
-    public async Task<IActionResult> CheckIdentities(List<string> nationalIds)
+    public async Task<IActionResult> CheckIdentities(CheckIdentitiesDto model)
     {
         var list = new List<string>();
-        foreach (var item in nationalIds)
+        foreach (var item in model.NationalIds)
         {
             if (ValidateSAID.check(item) != -1)
             {
@@ -59,7 +60,7 @@ public class ChecksController(ApplicationDbContext context) : Controller
             LastName = "test",
             UserId = User.GetUserId().ToString(),
             Status = "0/" + list.Count,
-            // FileUrl = "/templates/",
+            FileUrl ="/Storage/Files/"+ model.FilePath,
             Type = CheckTypes.Hadaf
         });
         await context.SaveChangesAsync();
