@@ -21,10 +21,18 @@ using WebUI.Services;
 
 try
 {
+    
+    
     var supportedCultures = new[] { new CultureInfo("ar-EG") };
 
     var builder = WebApplication.CreateBuilder(args);
 
+    
+    var root = builder.Environment.ContentRootPath;
+    if (!Directory.Exists(Path.Combine(root, "Storage"))) Directory.CreateDirectory(Path.Combine(root, "Storage"));
+    if (!Directory.Exists(Path.Combine(root, "Storage", "Files")))
+        Directory.CreateDirectory(Path.Combine(root, "Storage", "Files"));
+    
     builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
 // builder.Services.AddViteServices();

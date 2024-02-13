@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityService.Controllers;
 
-[Authorize]
+ [Authorize]
 [Route("[controller]")]
 [ApiController]
 public class UploadController : ControllerBase
