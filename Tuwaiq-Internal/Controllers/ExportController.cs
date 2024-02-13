@@ -6,12 +6,13 @@ using Microsoft.Net.Http.Headers;
 using NPOI.XSSF.UserModel;
 using MediaTypeHeaderValue = System.Net.Http.Headers.MediaTypeHeaderValue;
 using System.Net.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IdentityService.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
 
-//[Authorize]
+[Authorize]
 
 [Route("[controller]")]
 [ApiController]

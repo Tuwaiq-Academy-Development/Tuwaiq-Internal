@@ -247,11 +247,11 @@ try
 // app.UseMiddleware<AddCompanyClaimsMiddleware>();
 
 
-    app.MapRazorPages();//.RequireAuthorization();
+    app.MapRazorPages().RequireAuthorization();
 
-    app.MapControllers();//.RequireAuthorization();
+    app.MapControllers().RequireAuthorization();
 
-    app.MapDefaultControllerRoute();//.RequireAuthorization();
+    app.MapDefaultControllerRoute().RequireAuthorization();
     app.MapHealthChecks("/health").AllowAnonymous();
 
 // if (app.Environment.IsDevelopment())

@@ -9,7 +9,7 @@ using TuwaiqInternal.Data.Enums;
 
 namespace TuwaiqInternal.Controllers;
 
-//[Authorize]
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class ChecksController(ApplicationDbContext context) : Controller
