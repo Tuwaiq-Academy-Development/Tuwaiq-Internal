@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Shared.Extensions;
 using TuwaiqInternal.Helper;
@@ -74,7 +75,7 @@ public class ChecksController(ApplicationDbContext context) : Controller
         {
             x.UserId, x.Id, x.FirstName, x.FileUrl, x.Status, x.CreatedOn, x.LastUpdate, x.Type
         }).Skip(((page ?? 1) - 1) * (size ?? 10)).Take(size ?? 10).ToList();
-        var count = context.ChecksHistories.Count();
+        var count =await context.ChecksHistories.CountAsync();
         return Ok(new
         {
             Data = result.ToList(),

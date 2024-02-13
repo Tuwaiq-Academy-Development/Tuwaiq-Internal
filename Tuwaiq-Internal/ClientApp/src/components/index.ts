@@ -36,28 +36,50 @@ const indexPage: IndexPage = {
 
         this.table = new Tabulator(this.$refs.table, {
             height: "100%",
-            layout: 'fitColumns',
+            layout: "fitColumns",
             textDirection: "rtl",
-            ajaxURL: `${window.base_url}api/Checks/GetHistory`,
             pagination: true,
+            selectable: true,
             paginationMode: "remote",
             paginationSize: 10,
+            locale: true,
+            paginationCounter: "rows",
+            ajaxFiltering: false,
+            ajaxSorting: false,
+            ajaxURL: document.location.origin + "/api/checks/GetHistory" ,
             ajaxConfig: {
                 method: "GET",
                 headers: {
                     "my-x-12s4": `${window.token}`,
                 },
             },
-            ajaxFiltering: false,
-            ajaxSorting: false,
-            ajaxParams: () => {
-                return {
-                    // query: this.model_search
-                };
+            langs: {
+                "default": {
+                    "pagination": {
+                        "counter": {
+                            "showing": "يعرض بالصفحة",
+                            "of": "من",
+                            "rows": "السجلات",
+                            "pages": "الصفحات"
+                        },
+                        "page_size": " "
+
+                    },
+                }
             },
+            
+            // ajaxParams: () => {
+            //     return {
+            //         // query: this.model_search
+            //     };
+            // },
             ajaxLoader: true,
             placeholder: "لا توجد بيانات",
             dataLoaderLoading: dataLoaderLoading,
+            debugInvalidOptions: false,
+            dataReceiveParams: {
+                "last_page": "pagination.totalPages",
+            },
             columns: [
                 // {
                 //     title: 'رقم المستخدم', field: 'userId', headerSort: false,
@@ -187,8 +209,10 @@ const indexPage: IndexPage = {
 
     },
     async checkStatus(id) {
+        this.table?.alert("جاري التحديث");
         await myAxios.post(`api/Checks/UpdateStatus?id=` + id);
         this.table?.replaceData();
+        this.table?.clearAlert();
     } ,
     exportExcel(id:string) {
         return   BASE_URL  +api.ExportExcelUrl+"?id="+id ;
