@@ -14,7 +14,7 @@ public class ChecksHistory
     public string? FileUrl { get; set; }
     public string? Status { get; set; }
 
-    public string IdentitiesList { get; set; } 
+    public string[] IdentitiesList { get; set; } 
 
     public DateTime CreatedOn { get; set; } = DateTime.Now;
     public DateTime? LastUpdate { get; set; }

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using TuwaiqInternal.Data.Converters;
 
 namespace TuwaiqInternal.Data;
 
@@ -19,6 +20,7 @@ public class ApplicationDbContext : DbContext
          modelBuilder.Entity<ChecksHistory>().ToTable("ChecksHistory");
         modelBuilder.Entity<ToBeChecked>().HasKey(x => x.NationalId);
         modelBuilder.Entity<ChecksHistory>().HasKey(x => x.Id);
+        modelBuilder.Entity<ChecksHistory>().Property(s => s.IdentitiesList).HasConversion<ArrayConverter>();
         base.OnModelCreating(modelBuilder);
     }
 }

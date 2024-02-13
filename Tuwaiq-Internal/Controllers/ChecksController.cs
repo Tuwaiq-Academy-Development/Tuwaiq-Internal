@@ -53,7 +53,7 @@ public class ChecksController(ApplicationDbContext context) : Controller
         {
             CreatedOn = DateTime.Now,
             LastUpdate = DateTime.Now,
-            IdentitiesList = Newtonsoft.Json.JsonConvert.SerializeObject(validCandidates),
+            IdentitiesList = validCandidates.ToArray(),
             FirstName = User.GetName(),
             SecondName = "test",
             ThirdName = "test",
@@ -86,11 +86,15 @@ public class ChecksController(ApplicationDbContext context) : Controller
     public async Task<IActionResult> UpdateStatus(int id)
     {
         var toBeupdates = context.ChecksHistories.FirstOrDefault(i => i.Id == id);
-        var serializedList = JsonConvert.DeserializeObject<List<string>>(toBeupdates.IdentitiesList);
-        var checkCount = context.ToBeCheckeds.Count(i => serializedList.Contains(i.NationalId) && i.IsChecked == true);
-        toBeupdates.Status = checkCount + "/" + serializedList.Count;
-        toBeupdates.LastUpdate = DateTime.Now;
-        await context.SaveChangesAsync();
+        if (toBeupdates != null)
+        {
+            var serializedList = toBeupdates.IdentitiesList;
+            var checkCount = context.ToBeCheckeds.Count(i => serializedList.Contains(i.NationalId) && i.IsChecked == true);
+            toBeupdates.Status = checkCount + "/" + serializedList.Length;
+            toBeupdates.LastUpdate = DateTime.Now;
+            await context.SaveChangesAsync();
+        }
+
         return Ok();
     }
 }
