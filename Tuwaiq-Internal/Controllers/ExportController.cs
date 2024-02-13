@@ -32,24 +32,24 @@ public class ExportController(ApplicationDbContext context, IWebHostEnvironment 
             var sheet = workbook.CreateSheet("بيانات الطلاب");
             var index = 0;
             var headerRow = sheet.CreateRow(0);
-            headerRow.CreateCell(index).SetCellValue("National Id");
+            headerRow.CreateCell(index).SetCellValue("رقم الهوية");
             index++;
-            headerRow.CreateCell(index).SetCellValue("Status");
+            headerRow.CreateCell(index).SetCellValue("الحالة");
             index++;
-            headerRow.CreateCell(index).SetCellValue("FirstName");
+            headerRow.CreateCell(index).SetCellValue("الاسم الأول");
             index++;
-            headerRow.CreateCell(index).SetCellValue("SecondName");
+            headerRow.CreateCell(index).SetCellValue("الاسم الثاني");
             index++;
-            headerRow.CreateCell(index).SetCellValue("ThirdName");
+            headerRow.CreateCell(index).SetCellValue("الاسم الثالث");
             index++;
-            headerRow.CreateCell(index).SetCellValue("FourthName");
+            headerRow.CreateCell(index).SetCellValue("الاسم الرابع");
             var rowIndex = 1;
 
             foreach (var item in result)
             {
                 var dataRow = sheet.CreateRow(rowIndex);
                 dataRow.CreateCell(0).SetCellValue(item.NationalId);
-                dataRow.CreateCell(1).SetCellValue(item.IsRegistered);
+                dataRow.CreateCell(1).SetCellValue(item.IsRegistered==0 ? "غير مشترك" : item.IsRegistered==1 ? "غير فعال | غير محدث" :item.IsRegistered==2 ?"مشترك بالفعل":"");
                 dataRow.CreateCell(2).SetCellValue(item.FirstName);
                 dataRow.CreateCell(3).SetCellValue(item.SecondName);
                 dataRow.CreateCell(4).SetCellValue(item.ThirdName);
@@ -62,7 +62,7 @@ public class ExportController(ApplicationDbContext context, IWebHostEnvironment 
             stream.Seek(0, SeekOrigin.Begin);
 
             var memoryStream = stream;
-            var fileName = "IdentitiesList";
+            var fileName = "قائمة السجلات";
 
             fileName += ".xlsx";
 

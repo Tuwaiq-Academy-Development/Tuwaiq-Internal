@@ -242,7 +242,7 @@
     @* </environment> *@
 
     @await RenderSectionAsync("Scripts", required: false)
-
+    <input type="hidden" id="@Guid.NewGuid()" value="@(Configuration.GetValue<string?>("Server")??"")"/>
 </body>
 
 </html>

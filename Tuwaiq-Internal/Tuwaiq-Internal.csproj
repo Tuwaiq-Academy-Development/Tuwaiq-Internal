@@ -23,6 +23,12 @@
       <Content Update="wwwroot\favicon.ico">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+      <Content Update="wwwroot\js\main.js">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="wwwroot\css\main.css">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 
@@ -67,28 +73,9 @@
       <PackageReference Include="Vite.AspNetCore" Version="1.11.0" />
     </ItemGroup>
     
-    
-
     <ItemGroup>
-      <None Include="wwwroot\Storage\3x5qdao1qdi.png" />
+        <None Update="wwwroot/**/*">
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </None>
     </ItemGroup>
-
-
-
-
-    
-
-    <ItemGroup>
-      <Compile Update="Pages\CheckIdentitiesModel.cs">
-        <DependentUpon>CheckIdentities.cshtml</DependentUpon>
-      </Compile>
-    </ItemGroup>
-    
-    
-
-    <ItemGroup>
-      <Folder Include="wwwroot\templates\" />
-      <Folder Include="wwwroot\Templates\" />
-    </ItemGroup>
-
 </Project>

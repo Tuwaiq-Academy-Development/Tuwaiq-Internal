@@ -154,7 +154,7 @@ const component: IComponent = {
                 },
                 //action
                 {
-                    title: 'الإجراءات', headerSort: false, width: 150,
+                    title: 'الإجراءات', headerSort: false, width: 200,
                     cellClick: (e, cell) => {
                         const data = cell.getRow().getData();
                         this.checkStatus(cell.getRow().getData().id);
@@ -162,12 +162,15 @@ const component: IComponent = {
                     formatter: function (cell) {
                        const data = cell.getRow().getData().status.split("/");
                        if(data[0] == data[1]) {
-                           return 'تم الانتهاء'
+                           return `<div class="flex justify-center items-center"> 
+                                <span  class="w-full h-7 px-4 py-2 rounded-full flex justify-center items-center bg-gray-200 hover:bg-gray-400"  >تم الانتهاء</span> 
+                                <a target="_blank" :href="exportExcel()"  class="w-full h-7 px-4 py-2 rounded-full flex justify-center items-center bg-gray-200 hover:bg-gray-400">تصدير</a>
+                                </div>   `
                        }
                         return `
                         <div class="flex justify-center items-center"> 
-                                <button  class="w-full h-7 rounded-full flex justify-center items-center bg-gray-200 hover:bg-gray-400"  >تحديث </button> 
- <a target="_blank" :href="exportExcel()"  class="w-full h-7 rounded-full flex justify-center items-center bg-gray-200 hover:bg-gray-400">
+                                <button  class="w-full h-7 px-4 py-2 rounded-full flex justify-center items-center bg-gray-200 hover:bg-gray-400"  >تحديث </button> 
+ <a target="_blank" :href="exportExcel()"  class="w-full h-7 px-4 py-2 rounded-full flex justify-center items-center bg-gray-200 hover:bg-gray-400">
                     تصدير
                 </a>                            </div>   `
                     }
