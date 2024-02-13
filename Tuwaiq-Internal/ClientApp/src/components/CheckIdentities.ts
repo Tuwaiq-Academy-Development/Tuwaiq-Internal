@@ -47,17 +47,12 @@ const CheckIdentities: IComponent = {
             const buffer = <ArrayBuffer>reader.result;
             let localcandidates = "";
             wb.xlsx.load(buffer).then(workbook => {
-                workbook.eachSheet((sheet, id) => {
-                    sheet.eachRow(function (row, rowNumber) {
+                     workbook.worksheets[0].eachRow(function (row, rowNumber) {
                         if (rowNumber !== 1) {
-                            row.eachCell((cell) => {
-                                localcandidates += cell.text + '\n';
-                            })
-
+                                 localcandidates += row.values[1] + '\n';
                         }
                     })
-                })
-            }).then(() => {
+             }).then(() => {
                 toastSucess('تم إستيراد الهويات بنجاح');
                 this.candidates = localcandidates;
             })
