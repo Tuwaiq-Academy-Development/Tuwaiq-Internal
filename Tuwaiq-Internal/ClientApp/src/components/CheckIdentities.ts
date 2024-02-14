@@ -7,15 +7,15 @@ import {toastSucess} from "../config/toastifyConfig";
 interface IComponent extends Partial<ILayout> {
 
     checkIdentities: () => Promise<void>;
-      handleImportChange: (e: any) => void;
+    handleImportChange: (e: any) => void;
     candidates: string;
     file: any;
-    files:any;
+    files: [];
 }
 
 const CheckIdentities: IComponent = {
     file: any,
-    files:any,
+    files:  [],
     candidates: "",
     async init() {
         this.setCurrentRoute!('CheckIdentities', 'CheckIdentities');
@@ -23,22 +23,22 @@ const CheckIdentities: IComponent = {
     },
     async checkIdentities() {
         this.isLoading = true;
-        
-        const response = await this.uploadFile!(this.files);
-    var model={
-        nationalIds: this.candidates.split('\n'),
-
-        FilePath: response.data.fileNames[this.file.name],
-        
-    }
-        await axios.post(`/api/Checks/CheckIdentities`,model);
+        var model = {
+            nationalIds: this.candidates.split('\n'),
+            FilePath: ""
+        }
+        if (this.files.length > 0) {
+            const response = await this.uploadFile!(this.files);  
+            model.FilePath= response.data.fileNames[this.file.name];
+         }
+        await axios.post(`/api/Checks/CheckIdentities`, model);
         toastSucess('تم الاستعلام علي الهويات بنجاح');
         window.location.href = "/";
         this.isLoading = false;
     },
-  async  handleImportChange(e: any) {
+    async handleImportChange(e: any) {
         this.file = e.target.files[0];
-        this.files=e.target.files;
+        this.files = e.target.files;
         e.preventDefault();
         const wb = new ExcelJS.Workbook();
         const reader = new FileReader();
@@ -47,12 +47,12 @@ const CheckIdentities: IComponent = {
             const buffer = <ArrayBuffer>reader.result;
             let localcandidates = "";
             wb.xlsx.load(buffer).then(workbook => {
-                     workbook.worksheets[0].eachRow(function (row, rowNumber) {
-                        if (rowNumber !== 1) {
-                                 localcandidates += row.values[1] + '\n';
-                        }
-                    })
-             }).then(() => {
+                workbook.worksheets[0].eachRow(function (row, rowNumber) {
+                    if (rowNumber !== 1) {
+                        localcandidates += row.values[1] + '\n';
+                    }
+                })
+            }).then(() => {
                 toastSucess('تم إستيراد الهويات بنجاح');
                 this.candidates = localcandidates;
             })
