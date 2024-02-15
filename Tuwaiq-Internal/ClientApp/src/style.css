@@ -1,6 +1,7 @@
 @import  "tabulator-tables";
 @import "tabulator-tables/dist/css/tabulator_materialize.min.css";
 @import "@yaireo/tagify/dist/tagify.css";
+@import "toastify-js/src/toastify.css";
 
 @tailwind base;
 @tailwind components;

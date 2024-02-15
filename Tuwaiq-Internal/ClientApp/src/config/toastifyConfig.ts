@@ -40,7 +40,7 @@ const toastifyLoading = Toastify({
   }
 });
 
-export const toastSucess = (message: string) => {
+export const toastSuccess = (message: string) => {
   Toastify({
     ...globalOptions,
     style: {

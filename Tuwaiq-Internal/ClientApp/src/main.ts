@@ -4,6 +4,7 @@ import Alpine from 'alpinejs'
 import layout from './components/layout'
 import indexPage from './components/index'
 import CheckIdentities from './components/CheckIdentities'
+import './config/toastifyConfig';
 
 import 'flowbite';
 

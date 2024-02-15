@@ -2,7 +2,7 @@ import {ILayout} from './layout';
 import axios from 'axios';
 import {any} from "zod";
 import * as ExcelJS from "exceljs";
-import {toastSucess} from "../config/toastifyConfig";
+import {toastError, toastSuccess} from "../config/toastifyConfig";
 
 interface IComponent extends Partial<ILayout> {
 
@@ -31,9 +31,18 @@ const CheckIdentities: IComponent = {
             const response = await this.uploadFile!(this.files);  
             model.FilePath= response.data.fileNames[this.file.name];
          }
-        await axios.post(`/api/Checks/CheckIdentities`, model);
-        toastSucess('تم الاستعلام علي الهويات بنجاح');
-        window.location.href = "/";
+        try {
+            var check = await axios.post(`/api/Checks/CheckIdentities`, model);
+            if(check.status === 200){
+            toastSuccess('تم الاستعلام علي الهويات بنجاح');
+            window.location.href = "/";
+            }else{
+                toastError(check.data ?? 'خطأ في الاستعلام علي الهويات');
+            }
+        }catch (e :any) {
+            toastError(e?.response?.data ?? 'خطأ في الاستعلام علي الهويات');
+            console.log(e);
+        }
         this.isLoading = false;
     },
     async handleImportChange(e: any) {
@@ -53,7 +62,7 @@ const CheckIdentities: IComponent = {
                     }
                 })
             }).then(() => {
-                toastSucess('تم إستيراد الهويات بنجاح');
+                toastSuccess('تم إستيراد الهويات بنجاح');
                 this.candidates = localcandidates;
             })
         }

@@ -50,6 +50,12 @@ try
 #endif
         ;
 
+    builder.Services.AddRazorPages()
+#if DEBUG
+        .AddRazorRuntimeCompilation()
+#endif
+        ;
+
     var ssoSettings = new SSOSettings();
 
     builder.Configuration.GetSection(nameof(SSOSettings)).Bind(ssoSettings);

@@ -19,12 +19,18 @@ public class ChecksController(ApplicationDbContext context) : Controller
     public async Task<IActionResult> CheckIdentities(CheckIdentitiesDto model)
     {
         var list = new List<string>();
-        foreach (var item in model.NationalIds)
+        foreach (var item in model.NationalIds.Where(s=>s.Length==10).Distinct())
         {
             if (ValidateSAID.check(item) != -1)
             {
                 list.Add(item);
             }
+        }
+
+        if (list.Count == 0)
+        {
+            return BadRequest("لا يوجد رقم هوية صحيح");
+
         }
 
         var currentCandidates = context.ToBeCheckeds.Where(i => list.Contains(i.NationalId)).ToList();
@@ -74,7 +80,7 @@ public class ChecksController(ApplicationDbContext context) : Controller
         var result = context.ChecksHistories.Select(x => new
         {
             x.UserId, x.Id, x.FirstName, x.FileUrl, x.Status, x.CreatedOn, x.LastUpdate, x.Type
-        }).Skip(((page ?? 1) - 1) * (size ?? 10)).Take(size ?? 10).ToList();
+        }).OrderByDescending(s=>s.CreatedOn).Skip(((page ?? 1) - 1) * (size ?? 10)).Take(size ?? 10).ToList();
         var count =await context.ChecksHistories.CountAsync();
         return Ok(new
         {
