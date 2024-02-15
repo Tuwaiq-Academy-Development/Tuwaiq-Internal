@@ -26,7 +26,16 @@ try
     var supportedCultures = new[] { new CultureInfo("ar-EG") };
 
     var builder = WebApplication.CreateBuilder(args);
-
+    
+    // add json from wwwroot/assets.manifest.json
+    builder.Configuration.AddJsonFile
+    (
+        "wwwroot/assets.manifest.json",
+        optional: true,
+        reloadOnChange: true
+    );
+    
+    // how to retrieve value of file from assets.manifest.json
     
     var root = builder.Environment.ContentRootPath;
     if (!Directory.Exists(Path.Combine(root, "Storage"))) Directory.CreateDirectory(Path.Combine(root, "Storage"));
@@ -176,7 +185,7 @@ try
             options.TokenValidationParameters = new TokenValidationParameters
             {
                 NameClaimType = "name",
-                // RoleClaimType = "role",
+                RoleClaimType = "role",
                 //, RoleClaimType = "role"
             };
         });

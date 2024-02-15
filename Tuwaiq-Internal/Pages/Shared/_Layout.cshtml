@@ -238,7 +238,7 @@
         </div>
     </div>
     @* <environment include="Production"> *@
-        <script src="~/js/main.js" asp-append-version="true"></script>
+        <script src="~/@(Configuration["src/main.ts:file"]??"")" asp-append-version="true"></script>
     @* </environment> *@
 
     @await RenderSectionAsync("Scripts", required: false)
