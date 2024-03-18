@@ -1,0 +1,12 @@
+{
+  "providerId": "Microsoft.Tools.ServiceModel.Svcutil",
+  "version": "2.1.0",
+  "options": {
+    "inputs": [
+      "http://localhost/GSBExpress/SocialInsurance/GOSIEmploymentStatus/2.0/EmploymentStatusService.svc?wsdl"
+    ],
+    "outputFile": "Reference.cs",
+    "targetFramework": "net8.0",
+    "typeReuseMode": "All"
+  }
+}

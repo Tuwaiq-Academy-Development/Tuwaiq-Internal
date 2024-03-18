@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <RootNamespace>Check</RootNamespace>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Hashids.net" Version="1.7.0" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.2" />
+        <PackageReference Include="RestSharp" Version="110.2.0" />
+        <PackageReference Include="RestSharp.Serializers.NewtonsoftJson" Version="110.2.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+
+        <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="8.0.2" />
+
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+
+<!--        <PackageReference Include="CoreWCF.Http" Version="1.5.1" />-->
+<!--        <PackageReference Include="CoreWCF.Primitives" Version="1.5.1" />-->
+        <PackageReference Include="System.ServiceModel.Http" Version="8.0.0" />
+        <PackageReference Include="System.ServiceModel.NetTcp" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
+      <Content Update="appsettings.Development.json">
+        <DependentUpon>appsettings.json</DependentUpon>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DAL\DAL.csproj" />
+    </ItemGroup>
+
+</Project>

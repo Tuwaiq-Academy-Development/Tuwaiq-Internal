@@ -1,0 +1,6 @@
+@Tuwaiq_ServerCheck_HostAddress = http://localhost:5236
+
+GET {{Tuwaiq_ServerCheck_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
