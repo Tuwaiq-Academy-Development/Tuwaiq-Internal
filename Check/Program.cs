@@ -18,6 +18,7 @@ builder.Services.AddHostedService(
 
 
 builder.Services.AddScoped<CheckFactory>();
+builder.Services.AddScoped<GosiCheck>();
 
 var app = builder.Build();
 

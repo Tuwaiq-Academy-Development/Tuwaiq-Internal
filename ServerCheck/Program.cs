@@ -40,9 +40,12 @@ app.MapGet("/check/{code}", async (string code, ApplicationDbContext dbContext) 
             return Results.BadRequest();
         }
 
-        return Results.Ok(await dbContext.CheckList.OrderBy(s => s.NationalId).Skip(0)
-            .Take(builder.Configuration.GetValue<int?>("NumberOfChecks") ?? 10)
-            .ToListAsync());
+        var value = builder.Configuration.GetValue<int?>("NumberOfChecks");
+        var checkLists = await dbContext.CheckList.OrderBy(s => s.NationalId).Skip(0)
+            .Take(value ?? 10)
+            .ToListAsync();
+        
+        return Results.Ok(checkLists);
     })
     .WithName("Check")
     .WithOpenApi()
@@ -73,13 +76,22 @@ app.MapPost("/save/{code}/{nationalId}",
             var result = await dbContext.CheckList.FirstOrDefaultAsync(x => x.NationalId == nationalId && x.Id == model.Id);
             if (result == null)
             {
+                Console.WriteLine($"Not Found {nationalId} - {model.Id}");
                 return Results.NotFound();
             }
 
-            dbContext.Remove(result);
-            await dbContext.CheckLogs.AddAsync(model);
-            await dbContext.SaveChangesAsync();
-            return Results.Ok();
+            try
+            {
+                dbContext.CheckList.Remove(result);
+                await dbContext.CheckLogs.AddAsync(model);
+                await dbContext.SaveChangesAsync();
+                return Results.Ok();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return Results.BadRequest();
+            }
         })
     .WithName("Save")
     .WithOpenApi();

@@ -6,18 +6,18 @@ namespace Check.Services;
 
 public class GosiCheck : ICheck
 {
-    private readonly IGOSIEmploymentStatusService _employmentStatusService;
     private readonly ILogger<GosiCheck> _logger;
 
-    public GosiCheck(IGOSIEmploymentStatusService employmentStatusService, ILogger<GosiCheck> logger)
+    public GosiCheck(/*IGOSIEmploymentStatusService employmentStatusService,*/ ILogger<GosiCheck> logger)
     {
-        _employmentStatusService = employmentStatusService;
         _logger = logger;
     }
 
     public async Task<CheckLog?> Check(CheckList item)
     {
-        var result = await _employmentStatusService.GetEmploymentStatusAsync(item.NationalId);
+       var employmentStatusService = new GOSIEmploymentStatusServiceClient();
+
+        var result = await employmentStatusService.GetEmploymentStatusAsync(item.NationalId);
         _logger.LogInformation($"NationalId: {item} - Result: {JsonConvert.SerializeObject(result)}");
         var response = new CheckLog
         {
@@ -37,7 +37,8 @@ public class GosiCheck : ICheck
 
     public async Task<CheckLog[]?> Check(CheckList[] item)
     {
-        var result = await _employmentStatusService.GetEmploymentStatusMultipleAsync(item.Select(x => x.NationalId).ToArray());
+        var employmentStatusService = new GOSIEmploymentStatusServiceClient();
+        var result = await employmentStatusService.GetEmploymentStatusMultipleAsync(item.Select(x => x.NationalId).ToArray());
         var response = new List<CheckLog>();
 
         var list = result.Item as MultipleEmploymentStatusStructure;
