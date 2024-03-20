@@ -87,14 +87,8 @@ public class ChecksController(ApplicationDbContext context) : Controller
             var contextCheckLogs = context.CheckLogs;
             var list = contextCheckLogs.Where(i =>
                 serializedList.Contains(i.NationalId) && i.CheckType == toBeupdates.CheckType).ToList();
-            var list2 = list.Where(i=>
-            {
-                var b = i.CheckedOn >= toBeupdates.CreatedOn;
-                return b;
-            }).ToList();
-            var checkCount = contextCheckLogs.Count(i =>
-                serializedList.Contains(i.NationalId) && i.CheckType == toBeupdates.CheckType &&
-                i.CheckedOn >= toBeupdates.CreatedOn);
+            var list2 = list.DistinctBy(s=>s.NationalId).Where(i=>i.CheckedOn >= toBeupdates.CreatedOn).ToList();
+            var checkCount = list2.Count;
             toBeupdates.Status = checkCount + "/" + serializedList.Length;
             toBeupdates.LastUpdate = DateTime.Now;
             await context.SaveChangesAsync();
