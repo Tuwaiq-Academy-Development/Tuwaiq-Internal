@@ -120,7 +120,7 @@ app.MapGet("/check/{code}", async (string code, ApplicationDbContext dbContext) 
     .Produces<List<CheckList>>(StatusCodes.Status200OK);
 
 app.MapPost("/save/{code}/{nationalId}",
-        async (string code, string nationalId, [FromBody] CheckLog? model, ApplicationDbContext dbContext) =>
+        async (string code, string nationalId, [FromBody] CheckLog? model, ApplicationDbContext dbContext,IPublishEndpoint endpoint) =>
         {
             var hashids = new HashidsNet.Hashids("Tuwaiq-Internal");
             var id = hashids.Decode(code);
@@ -156,13 +156,24 @@ app.MapPost("/save/{code}/{nationalId}",
                 model.CheckedOn = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, saTimeZone);
                 await dbContext.CheckLogs.AddAsync(model);
                 await dbContext.SaveChangesAsync();
-                return Results.Ok();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 return Results.BadRequest();
             }
+
+            try
+            {
+                await endpoint.Publish<CheckGosiResponse>(new CheckGosiResponse(nationalId, model.CheckedOn, model.CheckType.ToString(), model.Status));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            
+            return Results.Ok();
+
         })
     .WithName("Save")
     .WithOpenApi();
