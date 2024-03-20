@@ -109,7 +109,7 @@ app.MapGet("/check/{code}", async (string code, ApplicationDbContext dbContext) 
         }
 
         var value = builder.Configuration.GetValue<int?>("NumberOfChecks");
-        var checkLists = await dbContext.CheckList.OrderBy(s => s.NationalId).Skip(0)
+        var checkLists = await dbContext.CheckList.OrderBy(s => s.CreatedOn).Skip(0)
             .Take(value ?? 10)
             .ToListAsync();
         
@@ -151,6 +151,7 @@ app.MapPost("/save/{code}/{nationalId}",
             try
             {
                 dbContext.CheckList.Remove(result);
+                model.CheckedOn = DateTime.Now;
                 await dbContext.CheckLogs.AddAsync(model);
                 await dbContext.SaveChangesAsync();
                 return Results.Ok();

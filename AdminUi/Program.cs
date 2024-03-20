@@ -267,7 +267,29 @@ try
     app.UseAuthorization();
 
 // app.UseMiddleware<AddCompanyClaimsMiddleware>();
+    app.Use(async (httpContext, next) =>
+    {
+        try
+        {
+            // httpContext.Request.Headers.TryGetValue("s-language", out var langEnum);
 
+            // if (!string.IsNullOrEmpty(langEnum))
+            {
+                // var lang = Convert.ToInt32(langEnum) == 1 ? "ar-EG" : "en-US";
+                var cult = new CultureInfo("ar-EG");
+                cult.NumberFormat.CurrencySymbol = "SAR";
+                cult.DateTimeFormat.ShortDatePattern = "dd-MM-yyyy";
+                CultureInfo.DefaultThreadCurrentCulture = cult;
+                CultureInfo.DefaultThreadCurrentUICulture = cult;
+            }
+        }
+        catch
+        {
+//
+        }
+
+        await next.Invoke();
+    });
 
     app.MapRazorPages().RequireAuthorization();
 

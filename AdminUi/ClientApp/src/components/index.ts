@@ -93,7 +93,7 @@ const indexPage: IndexPage = {
                 //     }
                 // },
                 {
-                    title: 'اسم المستخدم', field: 'firstName', headerSort: false,
+                    title: 'اسم المستخدم', field: 'username', headerSort: false,
                     formatter: function (cell) {
                         if (cell.getValue() == null) return '';
                         return `

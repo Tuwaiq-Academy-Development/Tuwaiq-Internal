@@ -50,8 +50,6 @@ public class ChecksController(ApplicationDbContext context) : Controller
 
         context.CheckRequests.Add(new CheckRequest()
         {
-            CreatedOn = DateTime.Now,
-            LastUpdate = DateTime.Now,
             IdentitiesList = validCandidates.ToArray(),
             Username = User.GetName(),
             UserId = User.GetUserId().ToString(),
@@ -86,8 +84,17 @@ public class ChecksController(ApplicationDbContext context) : Controller
         if (toBeupdates != null)
         {
             var serializedList = toBeupdates.IdentitiesList;
-            var checkCount =
-                context.CheckList.Count(i => serializedList.Contains(i.NationalId) && i.CheckType == toBeupdates.CheckType);
+            var contextCheckLogs = context.CheckLogs;
+            var list = contextCheckLogs.Where(i =>
+                serializedList.Contains(i.NationalId) && i.CheckType == toBeupdates.CheckType).ToList();
+            var list2 = list.Where(i=>
+            {
+                var b = i.CheckedOn >= toBeupdates.CreatedOn;
+                return b;
+            }).ToList();
+            var checkCount = contextCheckLogs.Count(i =>
+                serializedList.Contains(i.NationalId) && i.CheckType == toBeupdates.CheckType &&
+                i.CheckedOn >= toBeupdates.CreatedOn);
             toBeupdates.Status = checkCount + "/" + serializedList.Length;
             toBeupdates.LastUpdate = DateTime.Now;
             await context.SaveChangesAsync();
