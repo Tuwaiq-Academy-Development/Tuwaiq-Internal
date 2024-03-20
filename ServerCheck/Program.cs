@@ -151,7 +151,9 @@ app.MapPost("/save/{code}/{nationalId}",
             try
             {
                 dbContext.CheckList.Remove(result);
-                model.CheckedOn = DateTime.Now;
+                var timeUtc = DateTime.UtcNow;
+                var saTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Riyadh");
+                model.CheckedOn = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, saTimeZone);
                 await dbContext.CheckLogs.AddAsync(model);
                 await dbContext.SaveChangesAsync();
                 return Results.Ok();

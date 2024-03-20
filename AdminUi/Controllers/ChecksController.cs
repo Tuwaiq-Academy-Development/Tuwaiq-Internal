@@ -90,7 +90,11 @@ public class ChecksController(ApplicationDbContext context) : Controller
             var list2 = list.DistinctBy(s=>s.NationalId).Where(i=>i.CheckedOn >= toBeupdates.CreatedOn).ToList();
             var checkCount = list2.Count;
             toBeupdates.Status = checkCount + "/" + serializedList.Length;
-            toBeupdates.LastUpdate = DateTime.Now;
+            
+            var timeUtc = DateTime.UtcNow;
+            var saTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Riyadh");
+            toBeupdates.LastUpdate = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, saTimeZone);
+            context.CheckRequests.Update(toBeupdates);
             await context.SaveChangesAsync();
         }
 
