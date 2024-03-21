@@ -16,4 +16,6 @@ public class CheckList
     [MaxLength(10)] public string NationalId { get; init; } = null!;
     public DateTime CreatedOn { get;private set; }
     public CheckType CheckType { get; init; } = CheckType.Gosi;
+
+    public int? RequestId { get; set; }
 }

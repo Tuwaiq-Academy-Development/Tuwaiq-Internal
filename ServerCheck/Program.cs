@@ -154,6 +154,7 @@ app.MapPost("/save/{code}/{nationalId}",
                 var timeUtc = DateTime.UtcNow;
                 var saTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Riyadh");
                 model.CheckedOn = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, saTimeZone);
+                model.RequestId = result.RequestId;
                 await dbContext.CheckLogs.AddAsync(model);
                 await dbContext.SaveChangesAsync();
             }

@@ -19,7 +19,11 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 
         modelBuilder.Entity<CheckRequest>().ToTable("CheckRequests");
         modelBuilder.Entity<CheckRequest>().HasKey(x => x.Id);
-        modelBuilder.Entity<CheckRequest>().Property(s => s.IdentitiesList).HasConversion<ArrayConverter>();
+        // modelBuilder.Entity<CheckRequest>().Property(s => s.IdentitiesList).HasConversion<ArrayConverter>();
+        modelBuilder.Entity<CheckRequest>().HasMany<CheckList>().WithOne().HasForeignKey(s => s.RequestId).OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<CheckRequest>().HasMany<CheckLog>().WithOne().HasForeignKey(s => s.RequestId).OnDelete(DeleteBehavior.Cascade);
+        
+        
         
         modelBuilder.Entity<CheckLog>().ToTable("CheckLogs");
         modelBuilder.Entity<CheckLog>().HasKey(x => x.Id);

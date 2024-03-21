@@ -71,7 +71,7 @@ Data:     `,e)}_wipeElements(){this.dispatch("rows-wipe"),this.destroy(),this.ad
 							</div>
 					         </template>
 							</div>
-						</div>`}},{title:"الإجراءات",field:"id",headerSort:!1,width:200,cellClick:(t,i)=>{i.getRow().getData(),this.checkStatus(i.getRow().getData().id)},formatter:function(t){const i=t.getRow().getData().status.split("/");var r=t.getValue();return i[0]==i[1]?`<div class="flex justify-center items-center gap-x-2"> 
+						</div>`}},{title:"الإجراءات",field:"id",headerSort:!1,width:200,cellClick:async(t,i)=>{const r=i.getRow().getData();r.status.split("/")[0]!=r.status.split("/")[1]&&await this.checkStatus(i.getRow().getData().id)},formatter:function(t){const i=t.getRow().getData().status.split("/");var r=t.getValue();return i[0]==i[1]?`<div class="flex justify-center items-center gap-x-2"> 
                                 <span  class="w-full h-7 px-4 py-2 rounded-full flex justify-center items-center bg-gray-200 hover:bg-gray-400"  >تم الانتهاء</span> 
                                 <a target="_blank" :href="exportExcel(${r})"  class="w-full h-7 px-4 py-2 rounded-full flex justify-center items-center bg-gray-200 hover:bg-gray-400">تصدير</a>
                                 </div>   `:`

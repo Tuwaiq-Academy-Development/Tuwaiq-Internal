@@ -31,34 +31,38 @@ public class ChecksController(ApplicationDbContext context) : Controller
             return BadRequest("لا يوجد رقم هوية صحيح");
         }
 
-        var currentCandidates = context.CheckList.Where(i => list.Contains(i.NationalId)).ToList();
-        var validCandidates = new List<string>();
-        foreach (var item in list)
+        // var currentCandidates = context.CheckList.Where(i => list.Contains(i.NationalId)).ToList();
+
+        if (list.Any())
         {
-            var current = currentCandidates.FirstOrDefault(i => i.NationalId == item);
-            if (current == null)
+            var checkRequest = new CheckRequest()
             {
+                Username = User.GetName(),
+                UserId = User.GetUserId().ToString(),
+                Status = "0/" + list.Count,
+                FileUrl = "/Storage/Files/" + model.FilePath,
+                CheckType = CheckType.Gosi
+            };
+            context.CheckRequests.Add(checkRequest);
+            await context.SaveChangesAsync();
+
+            foreach (var item in list)
+            {
+                // var current = currentCandidates.FirstOrDefault(i => i.NationalId == item);
+                // if (current == null)
                 context.CheckList.Add(new CheckList
                 {
                     NationalId = item,
-                    CheckType = CheckType.Gosi
+                    CheckType = CheckType.Gosi,
+                    RequestId = checkRequest.Id
                 });
             }
 
-            validCandidates.Add(item);
+            await context.SaveChangesAsync();
+            return Ok();
         }
 
-        context.CheckRequests.Add(new CheckRequest()
-        {
-            IdentitiesList = validCandidates.ToArray(),
-            Username = User.GetName(),
-            UserId = User.GetUserId().ToString(),
-            Status = "0/" + list.Count,
-            FileUrl = "/Storage/Files/" + model.FilePath,
-            CheckType = CheckType.Gosi
-        });
-        await context.SaveChangesAsync();
-        return Ok();
+        return BadRequest("لا يوجد رقم هوية صحيح");
     }
 
     [HttpGet("[action]")]
@@ -80,21 +84,19 @@ public class ChecksController(ApplicationDbContext context) : Controller
     [HttpPost("[action]")]
     public async Task<IActionResult> UpdateStatus(int id)
     {
-        var toBeupdates = context.CheckRequests.FirstOrDefault(i => i.Id == id);
-        if (toBeupdates != null)
+        var checkRequest = await context.CheckRequests.FindAsync(id);
+        if (checkRequest != null)
         {
-            var serializedList = toBeupdates.IdentitiesList;
-            var contextCheckLogs = context.CheckLogs;
-            var list = contextCheckLogs.Where(i =>
-                serializedList.Contains(i.NationalId) && i.CheckType == toBeupdates.CheckType).ToList();
-            var list2 = list.DistinctBy(s=>s.NationalId).Where(i=>i.CheckedOn >= toBeupdates.CreatedOn).ToList();
-            var checkCount = list2.Count;
-            toBeupdates.Status = checkCount + "/" + serializedList.Length;
-            
+            var checkCount = context.CheckLogs.Count(s => s.RequestId == id);
+            var all = context.CheckList.Count(s => s.RequestId == id);
+            checkRequest.Status = checkCount + "/" + (all + checkCount);
+
             var timeUtc = DateTime.UtcNow;
             var saTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Riyadh");
-            toBeupdates.LastUpdate = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, saTimeZone);
-            context.CheckRequests.Update(toBeupdates);
+            var checkRequestLastUpdate = context.CheckList.Max(s => s.CreatedOn);
+            checkRequest.LastUpdate =
+                all > 0 ? checkRequestLastUpdate : TimeZoneInfo.ConvertTimeFromUtc(timeUtc, saTimeZone);
+            context.CheckRequests.Update(checkRequest);
             await context.SaveChangesAsync();
         }
 

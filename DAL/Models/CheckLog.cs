@@ -10,4 +10,6 @@ public class CheckLog
     public string? Response { get; set; } = null!;
     public CheckType CheckType { get; set; }
     public string Status { get; set; } = null!;
+    
+    public int? RequestId { get; set; }
 }

@@ -16,7 +16,7 @@ public class CheckRequest
     public string? FileUrl { get; set; } = null!;
     public string? Status { get; set; } = null!;
 
-    public string[] IdentitiesList { get; set; } = null!;
+    // public string[] IdentitiesList { get; set; } = null!;
     public DateTime CreatedOn { get; set; } 
     public DateTime? LastUpdate { get; set; }
     public CheckType CheckType { get; set; }

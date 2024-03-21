@@ -17,11 +17,9 @@ public class ExportController(ApplicationDbContext context) : ControllerBase
     {
         try
         {
-            var history = await context.CheckRequests.FindAsync(id);
+            // var history = await context.CheckRequests.FindAsync(id);
             var result = await context
-                .CheckLogs.Where(i =>
-                    history != null && history.IdentitiesList.Contains(i.NationalId) &&
-                    i.CheckedOn >= history.CreatedOn && i.CheckType == history.CheckType)
+                .CheckLogs.Where(i => i.RequestId==id)
                 .Select(x => new
                 {
                     x.NationalId, x.Status, x.CheckedOn, x.Response
@@ -34,20 +32,15 @@ public class ExportController(ApplicationDbContext context) : ControllerBase
             index++;
             headerRow.CreateCell(index).SetCellValue("الحالة");
             index++;
-            headerRow.CreateCell(index).SetCellValue("السجل");
-            index++;
             headerRow.CreateCell(index).SetCellValue("اخر تحديث");
             var rowIndex = 1;
 
-            if (history?.IdentitiesList != null)
-                foreach (var nationalId in history.IdentitiesList)
+                foreach (var item in result)
                 {
                     var dataRow = sheet.CreateRow(rowIndex);
-                    var item = result.FirstOrDefault(x => x.NationalId == nationalId);
-                    dataRow.CreateCell(0).SetCellValue(nationalId);
+                    dataRow.CreateCell(0).SetCellValue(item.NationalId);
                     dataRow.CreateCell(1).SetCellValue(item?.Status);
-                    dataRow.CreateCell(1).SetCellValue(item?.Response);
-                    dataRow.CreateCell(6).SetCellValue(item?.CheckedOn?.ToString("dd-MM-yyyy hh:mm:ss tt"));
+                    dataRow.CreateCell(2).SetCellValue(item?.CheckedOn?.ToString("dd-MM-yyyy hh:mm:ss tt"));
                     rowIndex++;
                 }
 
@@ -56,7 +49,7 @@ public class ExportController(ApplicationDbContext context) : ControllerBase
             stream.Seek(0, SeekOrigin.Begin);
 
             var memoryStream = stream;
-            var fileName = "قائمة السجلات" + $" {history?.Status} ";
+            var fileName = " قائمة السجلات " + DateTime.Now.ToString("dd-MM-yyyy hh:mm");
 
             fileName += ".xlsx";
 

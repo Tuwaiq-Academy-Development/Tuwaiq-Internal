@@ -8,7 +8,7 @@ VERSION="2.0"
 docker image rm tuwaiq-internals:latest
 docker image rm tuwaiq-internals:v$VERSION
 
-docker buildx build --platform linux/amd64 --load -t docker.tuwaiqdev.com/tuwaiq-internals:v$VERSION -f AdminUi/Dockerfile . --no-cache
+docker buildx build --platform linux/amd64 --load -t docker.tuwaiqdev.com/tuwaiq-internals:v$VERSION -f AdminUi/Dockerfile . --progress=plain #--no-cache
 
 docker push docker.tuwaiqdev.com/tuwaiq-internals:v$VERSION
 

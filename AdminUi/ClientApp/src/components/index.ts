@@ -10,11 +10,14 @@ import {BASE_URL} from "../config/envConfig";
 
 interface IndexPage extends Partial<ILayout> {
     initTabulator(): void;
+
     candidates: string;
     file: any;
     table: Tabulator | null;
-    checkStatus(id:string): Promise<void>;
-    exportExcel(id:string) : any;
+
+    checkStatus(id: string): Promise<void>;
+
+    exportExcel(id: string): any;
 
 }
 
@@ -46,7 +49,7 @@ const indexPage: IndexPage = {
             paginationCounter: "rows",
             ajaxFiltering: false,
             ajaxSorting: false,
-            ajaxURL: document.location.origin + "/api/checks/GetHistory" ,
+            ajaxURL: document.location.origin + "/api/checks/GetHistory",
             ajaxConfig: {
                 method: "GET",
                 headers: {
@@ -67,7 +70,7 @@ const indexPage: IndexPage = {
                     },
                 }
             },
-            
+
             // ajaxParams: () => {
             //     return {
             //         // query: this.model_search
@@ -85,11 +88,11 @@ const indexPage: IndexPage = {
                 //     title: 'رقم المستخدم', field: 'userId', headerSort: false,
                 //     formatter: function (cell) {
                 //         return `
-				// 		<div class="flex justify-center items-center">
-				// 			<div class="text-black leading-5">
-				// 				${cell.getValue()}
-				// 			</div>
-				// 		</div>`
+                // 		<div class="flex justify-center items-center">
+                // 			<div class="text-black leading-5">
+                // 				${cell.getValue()}
+                // 			</div>
+                // 		</div>`
                 //     }
                 // },
                 {
@@ -176,20 +179,21 @@ const indexPage: IndexPage = {
                 },
                 //action
                 {
-                    title: 'الإجراءات', field:'id', headerSort: false, width: 200,
-                    cellClick: (e, cell) => {
+                    title: 'الإجراءات', field: 'id', headerSort: false, width: 200,
+                    cellClick: async (e, cell) => {
                         const data = cell.getRow().getData();
-                        this.checkStatus(cell.getRow().getData().id);
+                        if (data.status.split("/")[0] == data.status.split("/")[1]) return;
+                        await this.checkStatus(cell.getRow().getData().id);
                     },
                     formatter: function (cell) {
-                       const data = cell.getRow().getData().status.split("/");
-                       var id = cell.getValue();
-                       if(data[0] == data[1]) {
-                           return `<div class="flex justify-center items-center gap-x-2"> 
+                        const data = cell.getRow().getData().status.split("/");
+                        var id = cell.getValue();
+                        if (data[0] == data[1]) {
+                            return `<div class="flex justify-center items-center gap-x-2"> 
                                 <span  class="w-full h-7 px-4 py-2 rounded-full flex justify-center items-center bg-gray-200 hover:bg-gray-400"  >تم الانتهاء</span> 
                                 <a target="_blank" :href="exportExcel(${id})"  class="w-full h-7 px-4 py-2 rounded-full flex justify-center items-center bg-gray-200 hover:bg-gray-400">تصدير</a>
                                 </div>   `
-                       }
+                        }
                         return `
                         <div class="flex justify-center items-center gap-x-2"> 
                                 <button  class="w-full h-7 px-4 py-2 rounded-full flex justify-center items-center bg-gray-200 hover:bg-gray-400"  >تحديث </button> 
@@ -213,9 +217,9 @@ const indexPage: IndexPage = {
         await myAxios.post(`api/Checks/UpdateStatus?id=` + id);
         this.table?.replaceData();
         this.table?.clearAlert();
-    } ,
-    exportExcel(id:string) {
-        return   BASE_URL  +api.ExportExcelUrl+"?id="+id ;
-     }
+    },
+    exportExcel(id: string) {
+        return BASE_URL + api.ExportExcelUrl + "?id=" + id;
+    }
 };
 export default () => indexPage;
